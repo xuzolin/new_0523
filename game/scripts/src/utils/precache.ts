@@ -15,6 +15,7 @@ export default function Precache(context: CScriptPrecacheContext) {
         [
             // kv文件路径
             // 'npc_abilities_custom.txt',
+            'scripts/npc/npc_abilities_custom.txt',
         ],
         context
     );
@@ -23,6 +24,8 @@ export default function Precache(context: CScriptPrecacheContext) {
         [
             // 单位名称
             // 'npc_dota_hero_***',
+            "npc_dota_hero_target_dummy",
+
         ],
         context
     );
@@ -68,7 +71,7 @@ function precacheUnits(unitNamesList: string[], context?: CScriptPrecacheContext
         });
     } else {
         unitNamesList.forEach(unitName => {
-            PrecacheUnitByNameAsync(unitName, () => {});
+            PrecacheUnitByNameAsync(unitName, () => { });
         });
     }
 }

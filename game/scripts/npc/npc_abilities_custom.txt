@@ -2,4 +2,34 @@
 
 "DOTAAbilities"
 {
+    // 碎裂冰爆
+    "suiliebingbao_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/suiliebingbao_swallowable.lua"
+		"AbilityValues" {
+			"duration" "5"
+			"radius" "810"
+			"aoe_radius" "320"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "crystal_maiden_freezing_field"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile1"								"soundevents/game_sounds_heroes/game_sounds_crystalmaiden.vsndevts"
+			"particle1"									"particles/units/heroes/hero_crystalmaiden/maiden_freezing_field_explosion.vpcf"
+            "particle2"									"particles/units/heroes/hero_crystalmaiden/maiden_freezing_field_snow.vpcf"
+            "particle3"									"particles/units/heroes/hero_ancient_apparition/ancient_apparition_cold_feet.vpcf"
+		}
+	}
 }

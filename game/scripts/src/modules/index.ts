@@ -6,6 +6,8 @@ declare global {
     interface CDOTAGameRules {
         // 声明所有的GameRules模块，这个主要是为了方便其他地方的引用（保证单例模式）
         XNetTable: XNetTable;
+
+        AllAbility: {};//所有技能
     }
 }
 
@@ -14,6 +16,9 @@ declare global {
  * 因此在这里作为单例模式使用
  **/
 export function ActivateModules() {
+    
+    GameRules.AllAbility = LoadKeyValues('scripts/npc/npc_abilities_custom.txt')
+
     if (GameRules.XNetTable == null) {
         // 初始化所有的GameRules模块
         GameRules.XNetTable = new XNetTable();

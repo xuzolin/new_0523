@@ -15,18 +15,20 @@ const DebugCallbacks: Record<string, { desc: string; func: DebugCallbackFunction
             }
         },
     },
-    ['-s']: {
+    ['-r']: {
         desc: '重载脚本',
         func: () => {
             SendToConsole('script_reload');
+            SendToServerConsole('script_reload');
             print('-r 命令script_reload!重载脚本!');
         },
     },
-    ['-r']: {
+    ['-res']: {
         desc: '重启游戏',
         func: () => {
             SendToConsole('restart'); // 重启游戏
-            print('-r 命令restart重启游戏!');
+            SendToServerConsole('restart'); // 重启游戏
+            print('-res 命令restart重启游戏!');
         },
     },
     ['get_key_v3']: {
@@ -108,6 +110,10 @@ export class Debug {
         const args = strs.slice(1);
         const steamid = PlayerResource.GetSteamAccountID(keys.playerid);
 
+        const playerId = keys.playerid;
+        const player = PlayerResource.GetPlayer(playerId);
+        const hero = PlayerResource.GetSelectedHeroEntity(playerId)
+
         if (cmd === '-debug') {
             if (this.OnlineDebugWhiteList.includes(steamid)) {
                 this._toggleDebugMode();
@@ -118,10 +124,25 @@ export class Debug {
         // commands that only work in debug mode below:
         if (!this.DebugEnabled) return;
 
-        const hero = HeroList.GetHero(0);
+        // const hero = HeroList.GetHero(0);
 
         if (DebugCallbacks[cmd]) {
             DebugCallbacks[cmd].func(hero, ...args);
         }
+
+        if (cmd === 'dd') {
+            CreateUnitByName("npc_dota_hero_target_dummy", hero.GetAbsOrigin(), true, null, null, DotaTeam.NEUTRALS);
+        }
+
+        if (cmd === 'add') {
+            hero.AddAbility('suiliebingbao_swallowable')?.SetLevel(1);
+            hero.ModifyGold(9999, true, 0)
+        }
+
+        if (cmd === 'tt') {
+            hero.RemoveAbility("suiliebingbao_swallowable")
+            hero.AddNewModifier(hero, undefined, "modifier_suiliebingbao_swallowable", {});
+        }
+
     }
 }
