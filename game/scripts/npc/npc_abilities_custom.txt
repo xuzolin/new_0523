@@ -11,6 +11,9 @@
 			"duration" "5"
 			"radius" "810"
 			"aoe_radius" "320"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "5"
 		}
 		"MaxLevel" "4"
 		"AbilityCooldown" "10"

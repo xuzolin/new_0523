@@ -46,3 +46,5 @@ export class GameConfig {
         // }
     }
 }
+
+LinkLuaModifier("modifier_frost_effect_debuff", "modifiers/modifier_frost_effect_debuff.lua", LuaModifierMotionType.NONE);

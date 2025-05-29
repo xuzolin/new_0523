@@ -33,13 +33,19 @@ export class modifier_suiliebingbao_swallowable extends BaseModifier {
     override IsPurgable(): boolean {
         return false;
     }
+
+    private ability_name = this.GetName().replace("modifier_", "")
     private interval: number = 0.1;
     private cd_remaining: number = 0;
 
-    private original_duration: number = GetAbilityValues("suiliebingbao_swallowable", "duration");
-    private original_radius: number = GetAbilityValues("suiliebingbao_swallowable", "radius");
-    private original_aoe_radius: number = GetAbilityValues("suiliebingbao_swallowable", "aoe_radius");
-    private original_cd: number = GetAbilityCooldown("suiliebingbao_swallowable");
+    private original_duration: number = GetAbilityValues(this.ability_name, "duration");
+    private original_radius: number = GetAbilityValues(this.ability_name, "radius");
+    private original_aoe_radius: number = GetAbilityValues(this.ability_name, "aoe_radius");
+    private original_cd: number = GetAbilityCooldown(this.ability_name);
+
+    private damage_int_mult: number = GetAbilityValues(this.ability_name, "damage_int_mult");
+    private damage_frost_mult: number = GetAbilityValues(this.ability_name, "damage_frost_mult");
+    private frost_stack: number = GetAbilityValues(this.ability_name, "frost_stack");
 
     // private original_cd: number = 10;
     // private original_duration = 5;
@@ -49,6 +55,10 @@ export class modifier_suiliebingbao_swallowable extends BaseModifier {
     override OnCreated(params: object): void {
         if (!IsServer()) return;
         this.StartIntervalThink(this.interval)
+
+        print("OnCreated", this.damage_int_mult)
+        print("OnCreated", this.damage_frost_mult)
+        print("OnCreated", this.frost_stack)
     }
 
     OnIntervalThink() {
@@ -81,7 +91,10 @@ export class modifier_suiliebingbao_swallowable extends BaseModifier {
                 enemies[0].AddNewModifier(parent, this.GetAbility(), modifier_suiliebingbao_debuff.name, {
                     duration: duration,
                     radius: radius,
-                    aoe_radius: aoe_radius
+                    aoe_radius: aoe_radius,
+                    damage_int_mult: this.damage_int_mult,
+                    damage_frost_mult: this.damage_frost_mult,
+                    frost_stack: this.frost_stack,
                 })
                 EmitSoundOnLocationWithCaster(parent.GetOrigin(), "hero_Crystal.freezingField.wind", parent)
             } else {
@@ -112,17 +125,26 @@ export class modifier_suiliebingbao_debuff extends BaseModifier {
     IsPurgable(): boolean {
         return false;
     }
-
+    private caster: CDOTA_BaseNPC_Hero
     private damage: number;
+    private damage_int_mult: number;
+    private damage_frost_mult: number;
+    private frost_stack: number;
+
     private radius: number;
     private aoe_radius: number;
     private tickRate: number;
     private damageTable: ApplyDamageOptions;
     OnCreated(params: any): void {
         if (!IsServer()) return;
-        this.damage = params.damage ?? 100
+        this.caster = this.GetCaster() as CDOTA_BaseNPC_Hero;
+        this.damage_int_mult = params.damage_int_mult ?? 0
+        this.damage_frost_mult = params.damage_frost_mult ?? 0
+        this.damage = this.damage_int_mult * this.caster.GetIntellect(false)
         this.radius = params.radius
         this.aoe_radius = params.aoe_radius
+        this.frost_stack = params.frost_stack ?? 0
+
         this.tickRate = 0.1;
 
         this.damageTable = {
@@ -151,7 +173,7 @@ export class modifier_suiliebingbao_debuff extends BaseModifier {
         ParticleManager.SetParticleControl(particleId, 0, this.GetParent().GetAbsOrigin());
         this.AddParticle(particleId2, false, false, -1, false, false)
 
-        // 启动思考器
+
         this.StartIntervalThink(this.tickRate);
         this.OnIntervalThink();
     }
@@ -173,22 +195,24 @@ export class modifier_suiliebingbao_debuff extends BaseModifier {
         )
         // 对每个敌人造成伤害
         enemies.forEach(enemy => {
-            this.damageTable.victim = enemy;
+            //计算伤害
+            let damage = this.damage + enemy.GetModifierStackCount("modifier_frost_effect_debuff", this.GetCaster()) * this.damage_frost_mult
             ApplyDamage({
                 victim: enemy,
                 attacker: this.GetCaster(),
-                damage: this.damage,
+                damage: damage,
                 ability: this.GetAbility(),
                 damage_type: DamageTypes.MAGICAL,
                 damage_flags: DamageFlag.NONE,
             });
-            // // 添加冰霜视觉效果
-            // const particleId = ParticleManager.CreateParticle(
-            //     "particles/generic_gameplay/generic_slowed_cold.vpcf",
-            //     ParticleAttachment.OVERHEAD_FOLLOW,
-            //     enemy
-            // );
-            // ParticleManager.ReleaseParticleIndex(particleId);
+            // 冰霜效果
+            let modifier = enemy.FindModifierByName("modifier_frost_effect_debuff");
+            if (modifier) {
+                modifier.SetStackCount(modifier.GetStackCount() + this.frost_stack);
+            } else {
+                enemy.AddNewModifier(this.GetCaster(), null, "modifier_frost_effect_debuff", {});
+            }
+
         });
 
         let fxIndex = ParticleManager.CreateParticle("particles/units/heroes/hero_crystalmaiden/maiden_freezing_field_explosion.vpcf",
