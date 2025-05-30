@@ -30,7 +30,7 @@
 		"ArmorPhysical"				"0"
         "MagicalResistance"         "0"
 
-		"AttackCapabilities"		"" // Not melee, to prevent built-in block calcs
+		// "AttackCapabilities"		"" // Not melee, to prevent built-in block calcs
 		"AttackDamageMin"			"0"
 		"AttackDamageMax"			"0"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"

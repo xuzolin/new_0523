@@ -2,23 +2,23 @@ import { BaseAbility, BaseModifier, registerAbility, registerModifier } from '..
 import { GetAbilityCooldown, GetAbilityValues } from '../utils/tstl-utils';
 
 @registerAbility()
-export class suiliebingbao_swallowable extends BaseAbility {
+export class bingshuangmodun_swallowable extends BaseAbility {
     GetBehavior(): AbilityBehavior | Uint64 {
         return AbilityBehavior.PASSIVE;
     }
 
     GetIntrinsicModifierName(): string {
-        return modifier_suiliebingbao_swallowable.name;
+        return modifier_bingshuangmodun_swallowable.name;
     }
 }
 //吞噬后的技能buff
 @registerModifier()
-export class modifier_suiliebingbao_swallowable extends BaseModifier {
+export class modifier_bingshuangmodun_swallowable extends BaseModifier {
     override IsHidden(): boolean {
         return false;
     }
     GetTexture() {
-        return "crystal_maiden_freezing_field";
+        return "lich_frost_shield";
         // return "attr_damage";
     }
 
@@ -76,31 +76,18 @@ export class modifier_suiliebingbao_swallowable extends BaseModifier {
         this.cd_remaining -= this.interval
         if (this.cd_remaining <= 0) {
             //释放技能
-            const enemies = FindUnitsInRadius(
-                this.GetParent().GetTeamNumber(), // 敌人的队伍
-                this.GetParent().GetAbsOrigin(), // 敌人的位置
-                undefined, // 查找范围
-                1200, // 查找范围
-                UnitTargetTeam.ENEMY, // 查找敌人
-                UnitTargetType.HERO + UnitTargetType.BASIC, // 查找英雄和小兵
-                UnitTargetFlags.MAGIC_IMMUNE_ENEMIES, // 查找标志，对魔免单位也有效
-                FindOrder.CLOSEST, // 查找顺序
-                false
-            );
-            if (enemies.length > 0) {
-                enemies[0].AddNewModifier(parent, this.GetAbility(), modifier_suiliebingbao_debuff.name, {
+            if (parent.IsAlive()) {
+                parent.AddNewModifier(this.GetCaster(), null, "modifier_bingshuangmodun", {
                     duration: duration,
                     radius: radius,
                     aoe_radius: aoe_radius,
                     damage_int_mult: this.damage_int_mult,
                     damage_frost_mult: this.damage_frost_mult,
                     frost_stack: this.frost_stack,
-                })
-                EmitSoundOnLocationWithCaster(parent.GetOrigin(), "hero_Crystal.freezingField.wind", parent)
+                });
             } else {
                 return
             }
-
 
             //重置cd
             this.cd_remaining = cd
@@ -113,13 +100,13 @@ export class modifier_suiliebingbao_swallowable extends BaseModifier {
 
 // 技能效果
 @registerModifier()
-export class modifier_suiliebingbao_debuff extends BaseModifier {
+export class modifier_bingshuangmodun extends BaseModifier {
     IsHidden(): boolean {
         return false;
     }
 
     IsDebuff(): boolean {
-        return true
+        return false
     }
 
     IsPurgable(): boolean {
@@ -134,7 +121,6 @@ export class modifier_suiliebingbao_debuff extends BaseModifier {
     private radius: number;
     private aoe_radius: number;
     private tickRate: number;
-    private damageTable: ApplyDamageOptions;
     OnCreated(params: any): void {
         if (!IsServer()) return;
         this.caster = this.GetCaster() as CDOTA_BaseNPC_Hero;
@@ -145,34 +131,17 @@ export class modifier_suiliebingbao_debuff extends BaseModifier {
         this.aoe_radius = params.aoe_radius
         this.frost_stack = params.frost_stack ?? 0
 
-        this.tickRate = 0.1;
+        this.tickRate = 1;
 
-        this.damageTable = {
-            victim: this.GetParent(),
-            attacker: this.GetCaster(),
-            damage: this.damage,
-            ability: this.GetAbility(),
-            damage_type: DamageTypes.MAGICAL,
-            damage_flags: DamageFlag.NONE,
-        };
-
-        const particleId = ParticleManager.CreateParticle(
-            "particles/units/heroes/hero_crystalmaiden/maiden_freezing_field_snow.vpcf",
+        const particleId2 = ParticleManager.CreateParticle(
+            "particles/units/heroes/hero_lich/lich_ice_age.vpcf",
             ParticleAttachment.ABSORIGIN_FOLLOW,
             this.GetParent()
         );
-        // ParticleManager.SetParticleControl(particleId, 0, this.GetParent().GetAbsOrigin());
-        ParticleManager.SetParticleControlEnt(particleId, 0, this.GetParent(), ParticleAttachment.ABSORIGIN_FOLLOW, undefined, this.GetParent().GetAbsOrigin(), true);
-        ParticleManager.SetParticleControl(particleId, 1, Vector(this.radius, this.radius, this.radius));
-        this.AddParticle(particleId, false, false, -1, false, false)
-
-
-        const particleId2 = ParticleManager.CreateParticle(
-            "particles/units/heroes/hero_ancient_apparition/ancient_apparition_cold_feet.vpcf",
-            ParticleAttachment.OVERHEAD_FOLLOW,
-            this.GetParent()
-        );
-        ParticleManager.SetParticleControl(particleId2, 0, this.GetParent().GetAbsOrigin());
+        ParticleManager.SetParticleControlEnt(particleId2, 1, this.GetParent(), ParticleAttachment.ABSORIGIN_FOLLOW, undefined, this.GetParent().GetAbsOrigin(), true);
+        // ParticleManager.SetParticleControl(particleId2, 0, this.GetParent().GetAbsOrigin());
+        // ParticleManager.SetParticleControl(particleId2, 1, this.GetParent().GetAbsOrigin());
+        ParticleManager.SetParticleControl(particleId2, 2, Vector(this.aoe_radius, this.aoe_radius, this.aoe_radius));
         this.AddParticle(particleId2, false, false, -1, false, false)
 
 
@@ -183,11 +152,11 @@ export class modifier_suiliebingbao_debuff extends BaseModifier {
     OnIntervalThink() {
         if (!IsServer()) return;
         // 获取区域内所有敌人
-        let random_pos = this.GetParent().GetAbsOrigin() + RandomVector(RandomFloat(0, this.radius)) as Vector
+        // let random_pos = this.GetParent().GetAbsOrigin() + RandomVector(RandomFloat(0, this.radius)) as Vector
         let enemies = FindUnitsInRadius(
             this.GetCaster().GetTeamNumber(), // 敌人的队伍
-            random_pos, // 敌人的位置
-            undefined, // 查找范围
+            this.GetParent().GetAbsOrigin(), // 敌人的位置
+            undefined,
             this.aoe_radius, // 查找范围
             UnitTargetTeam.ENEMY, // 查找敌人
             UnitTargetType.HERO + UnitTargetType.BASIC, // 查找英雄和小兵
@@ -216,13 +185,17 @@ export class modifier_suiliebingbao_debuff extends BaseModifier {
             }
 
         });
-
-        let fxIndex = ParticleManager.CreateParticle("particles/units/heroes/hero_crystalmaiden/maiden_freezing_field_explosion.vpcf",
-            ParticleAttachment.CUSTOMORIGIN, this.GetParent())
-        ParticleManager.SetParticleControl(fxIndex, 0, random_pos)
-        ParticleManager.SetParticleControl(fxIndex, 1, random_pos)
-        ParticleManager.ReleaseParticleIndex(fxIndex)
-        EmitSoundOnLocationWithCaster(random_pos, "hero_Crystal.freezingField.explosion", this.GetParent())
+        const particleId = ParticleManager.CreateParticle(
+            "particles/units/heroes/hero_lich/lich_ice_age_dmg.vpcf",
+            ParticleAttachment.ABSORIGIN_FOLLOW,
+            this.GetParent()
+        );
+        ParticleManager.SetParticleControl(particleId, 0, this.GetParent().GetAbsOrigin());
+        // ParticleManager.SetParticleControl(particleId, 1, this.GetParent().GetAbsOrigin());
+        ParticleManager.SetParticleControlEnt(particleId, 1, this.GetParent(), ParticleAttachment.ABSORIGIN_FOLLOW, undefined, this.GetParent().GetAbsOrigin(), true);
+        ParticleManager.SetParticleControl(particleId, 2, Vector(this.aoe_radius, this.aoe_radius, this.aoe_radius));
+        ParticleManager.ReleaseParticleIndex(particleId);
+        EmitSoundOnLocationWithCaster(this.GetParent().GetAbsOrigin(), "Hero_Lich.IceAge.Tick", this.GetParent())
     }
 
 }

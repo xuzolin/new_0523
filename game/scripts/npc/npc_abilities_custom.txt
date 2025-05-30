@@ -35,4 +35,38 @@
             "particle3"									"particles/units/heroes/hero_ancient_apparition/ancient_apparition_cold_feet.vpcf"
 		}
 	}
+
+	// 冰霜魔盾
+    "bingshuangmodun_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/bingshuangmodun_swallowable.lua"
+		"AbilityValues" {
+			"duration" "5"
+			"radius" "800"
+			"aoe_radius" "800"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "lich_frost_shield"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "800"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile1"								"soundevents/game_sounds_heroes/game_sounds_lich.vsndevts"
+			"particle1"									"particles/units/heroes/hero_lich/lich_ice_age_dmg.vpcf"
+            "particle2"									"particles/units/heroes/hero_lich/lich_ice_age.vpcf"
+            "particle3"									""
+		}
+	}
 }
