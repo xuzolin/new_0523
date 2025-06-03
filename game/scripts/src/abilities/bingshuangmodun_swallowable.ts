@@ -21,8 +21,7 @@ export class modifier_bingshuangmodun_swallowable extends BaseModifier {
         return false;
     }
     GetTexture() {
-        return "lich_frost_shield";
-        // return "attr_damage";
+        return "juggernaut_omni_slash";
     }
 
     RemoveOnDeath(): boolean {

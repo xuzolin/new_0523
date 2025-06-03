@@ -135,13 +135,13 @@ export class Debug {
         }
 
         if (cmd === 'add') {
-            hero.AddAbility('bingshuangxinxing_swallowable')?.SetLevel(1);
+            hero.AddAbility('wudizhan_swallowable')?.SetLevel(1);
             hero.ModifyGold(9999, true, 0)
         }
 
         if (cmd === 'tt') {
-            hero.RemoveAbility("bingshuangxinxing_swallowable")
-            hero.AddNewModifier(hero, undefined, "modifier_bingshuangxinxing_swallowable", {});
+            hero.RemoveAbility("wudizhan_swallowable")
+            hero.AddNewModifier(hero, undefined, "modifier_wudizhan_swallowable", {});
         }
 
     }
