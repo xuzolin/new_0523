@@ -2,18 +2,18 @@ import { BaseAbility, BaseModifier, registerAbility, registerModifier } from '..
 import { GetAbilityCooldown, GetAbilityValues } from '../utils/tstl-utils';
 
 @registerAbility()
-export class suiliebingbao_swallowable extends BaseAbility {
+export class bingshuangxinxing_swallowable extends BaseAbility {
     GetBehavior(): AbilityBehavior | Uint64 {
         return AbilityBehavior.PASSIVE;
     }
 
     GetIntrinsicModifierName(): string {
-        return modifier_suiliebingbao_swallowable.name;
+        return modifier_bingshuangxinxing_swallowable.name;
     }
 }
 //吞噬后的技能buff
 @registerModifier()
-export class modifier_suiliebingbao_swallowable extends BaseModifier {
+export class modifier_bingshuangxinxing_swallowable extends BaseModifier {
     override IsHidden(): boolean {
         if (this.GetAbility()) {
             return true;
@@ -21,8 +21,7 @@ export class modifier_suiliebingbao_swallowable extends BaseModifier {
         return false;
     }
     GetTexture() {
-        return "crystal_maiden_freezing_field";
-        // return "attr_damage";
+        return "crystal_maiden_crystal_nova";
     }
 
     RemoveOnDeath(): boolean {
@@ -50,6 +49,7 @@ export class modifier_suiliebingbao_swallowable extends BaseModifier {
     private damage_frost_mult: number = GetAbilityValues(this.ability_name, "damage_frost_mult");
     private frost_stack: number = GetAbilityValues(this.ability_name, "frost_stack");
 
+
     // private original_cd: number = 10;
     // private original_duration = 5;
     // private original_radius = 810;
@@ -58,12 +58,15 @@ export class modifier_suiliebingbao_swallowable extends BaseModifier {
     override OnCreated(params: object): void {
         if (!IsServer()) return;
         this.StartIntervalThink(this.interval)
+
+        // print("OnCreated", this.damage_int_mult)
+        // print("OnCreated", this.damage_frost_mult)
+        // print("OnCreated", this.frost_stack)
     }
 
     OnIntervalThink() {
         if (!IsServer()) return;
-        let parent = this.GetParent()
-        // if (!parent.IsAlive()) { return }
+        let parent = this.GetParent() as CDOTA_BaseNPC_Hero
 
         //冷却缩减
         let cd_red = parent.GetCooldownReduction()
@@ -72,7 +75,9 @@ export class modifier_suiliebingbao_swallowable extends BaseModifier {
         let radius = this.original_radius
         let aoe_radius = this.original_aoe_radius
 
+
         this.cd_remaining -= this.interval
+
         if (this.cd_remaining <= 0 && parent.IsAlive()) {
             //释放技能
             const enemies = FindUnitsInRadius(
@@ -87,7 +92,7 @@ export class modifier_suiliebingbao_swallowable extends BaseModifier {
                 false
             );
             if (enemies.length > 0) {
-                enemies[0].AddNewModifier(parent, this.GetAbility(), modifier_suiliebingbao_debuff.name, {
+                enemies[0].AddNewModifier(parent, this.GetAbility(), modifier_bingshuangxinxing_debuff.name, {
                     duration: duration,
                     radius: radius,
                     aoe_radius: aoe_radius,
@@ -95,24 +100,24 @@ export class modifier_suiliebingbao_swallowable extends BaseModifier {
                     damage_frost_mult: this.damage_frost_mult,
                     frost_stack: this.frost_stack,
                 })
-                EmitSoundOnLocationWithCaster(parent.GetOrigin(), "hero_Crystal.freezingField.wind", parent)
             } else {
                 return
             }
+        } else {
+            return
+        }
 
-
-            //重置cd
-            this.cd_remaining = cd
-            if (this.GetAbility()) {
-                this.GetAbility().StartCooldown(cd)
-            }
+        //重置cd
+        this.cd_remaining = cd
+        if (this.GetAbility()) {
+            this.GetAbility().StartCooldown(cd)
         }
     }
 }
 
 // 技能效果
 @registerModifier()
-export class modifier_suiliebingbao_debuff extends BaseModifier {
+export class modifier_bingshuangxinxing_debuff extends BaseModifier {
     IsHidden(): boolean {
         return false;
     }
@@ -133,7 +138,10 @@ export class modifier_suiliebingbao_debuff extends BaseModifier {
     private radius: number;
     private aoe_radius: number;
     private tickRate: number;
+    private count: number = 0;
+    private max_count: number;
     private damageTable: ApplyDamageOptions;
+
     OnCreated(params: any): void {
         if (!IsServer()) return;
         this.caster = this.GetCaster() as CDOTA_BaseNPC_Hero;
@@ -144,7 +152,9 @@ export class modifier_suiliebingbao_debuff extends BaseModifier {
         this.aoe_radius = params.aoe_radius
         this.frost_stack = params.frost_stack ?? 0
 
-        this.tickRate = 0.1;
+        this.tickRate = 0.5;
+        this.max_count = 3;
+
 
         this.damageTable = {
             victim: this.GetParent(),
@@ -166,15 +176,6 @@ export class modifier_suiliebingbao_debuff extends BaseModifier {
         this.AddParticle(particleId, false, false, -1, false, false)
 
 
-        const particleId2 = ParticleManager.CreateParticle(
-            "particles/units/heroes/hero_ancient_apparition/ancient_apparition_cold_feet.vpcf",
-            ParticleAttachment.OVERHEAD_FOLLOW,
-            this.GetParent()
-        );
-        ParticleManager.SetParticleControl(particleId2, 0, this.GetParent().GetAbsOrigin());
-        this.AddParticle(particleId2, false, false, -1, false, false)
-
-
         this.StartIntervalThink(this.tickRate);
         this.OnIntervalThink();
     }
@@ -182,10 +183,10 @@ export class modifier_suiliebingbao_debuff extends BaseModifier {
     OnIntervalThink() {
         if (!IsServer()) return;
         // 获取区域内所有敌人
-        let random_pos = this.GetParent().GetAbsOrigin() + RandomVector(RandomFloat(0, this.radius)) as Vector
+        let target_point = this.GetParent().GetAbsOrigin()
         let enemies = FindUnitsInRadius(
             this.GetCaster().GetTeamNumber(), // 敌人的队伍
-            random_pos, // 敌人的位置
+            target_point, // 敌人的位置
             undefined, // 查找范围
             this.aoe_radius, // 查找范围
             UnitTargetTeam.ENEMY, // 查找敌人
@@ -216,12 +217,18 @@ export class modifier_suiliebingbao_debuff extends BaseModifier {
 
         });
 
-        let fxIndex = ParticleManager.CreateParticle("particles/units/heroes/hero_crystalmaiden/maiden_freezing_field_explosion.vpcf",
+        let nova_pfx = ParticleManager.CreateParticle("particles/units/heroes/hero_crystalmaiden/maiden_crystal_nova.vpcf",
             ParticleAttachment.CUSTOMORIGIN, this.GetParent())
-        ParticleManager.SetParticleControl(fxIndex, 0, random_pos)
-        ParticleManager.SetParticleControl(fxIndex, 1, random_pos)
-        ParticleManager.ReleaseParticleIndex(fxIndex)
-        EmitSoundOnLocationWithCaster(random_pos, "hero_Crystal.freezingField.explosion", this.GetParent())
+        ParticleManager.SetParticleControl(nova_pfx, 0, target_point)
+        ParticleManager.SetParticleControl(nova_pfx, 1, Vector(this.aoe_radius, this.tickRate, this.aoe_radius))
+        ParticleManager.SetParticleControl(nova_pfx, 2, target_point)
+        ParticleManager.ReleaseParticleIndex(nova_pfx)
+        EmitSoundOnLocationWithCaster(target_point, "Hero_Crystal.CrystalNova", this.GetParent())    
+
+        this.count += 1;
+        if (this.count >= this.max_count) {
+            this.Destroy();
+        }
     }
 
 }

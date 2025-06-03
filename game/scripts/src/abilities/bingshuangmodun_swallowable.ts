@@ -15,6 +15,9 @@ export class bingshuangmodun_swallowable extends BaseAbility {
 @registerModifier()
 export class modifier_bingshuangmodun_swallowable extends BaseModifier {
     override IsHidden(): boolean {
+        if (this.GetAbility()) {
+            return true;
+        }
         return false;
     }
     GetTexture() {
@@ -56,15 +59,15 @@ export class modifier_bingshuangmodun_swallowable extends BaseModifier {
         if (!IsServer()) return;
         this.StartIntervalThink(this.interval)
 
-        print("OnCreated", this.damage_int_mult)
-        print("OnCreated", this.damage_frost_mult)
-        print("OnCreated", this.frost_stack)
+        // print("OnCreated", this.damage_int_mult)
+        // print("OnCreated", this.damage_frost_mult)
+        // print("OnCreated", this.frost_stack)
     }
 
     OnIntervalThink() {
         if (!IsServer()) return;
         let parent = this.GetParent()
-        if (!parent.IsAlive()) { return }
+        // if (!parent.IsAlive()) { return }
 
         //冷却缩减
         let cd_red = parent.GetCooldownReduction()
@@ -74,20 +77,16 @@ export class modifier_bingshuangmodun_swallowable extends BaseModifier {
         let aoe_radius = this.original_aoe_radius
 
         this.cd_remaining -= this.interval
-        if (this.cd_remaining <= 0) {
+        if (this.cd_remaining <= 0 && parent.IsAlive()) {
             //释放技能
-            if (parent.IsAlive()) {
-                parent.AddNewModifier(this.GetCaster(), null, "modifier_bingshuangmodun", {
-                    duration: duration,
-                    radius: radius,
-                    aoe_radius: aoe_radius,
-                    damage_int_mult: this.damage_int_mult,
-                    damage_frost_mult: this.damage_frost_mult,
-                    frost_stack: this.frost_stack,
-                });
-            } else {
-                return
-            }
+            parent.AddNewModifier(this.GetCaster(), null, "modifier_bingshuangmodun", {
+                duration: duration,
+                radius: radius,
+                aoe_radius: aoe_radius,
+                damage_int_mult: this.damage_int_mult,
+                damage_frost_mult: this.damage_frost_mult,
+                frost_stack: this.frost_stack,
+            });
 
             //重置cd
             this.cd_remaining = cd
@@ -111,6 +110,10 @@ export class modifier_bingshuangmodun extends BaseModifier {
 
     IsPurgable(): boolean {
         return false;
+    }
+
+    GetTexture() {
+        return "lich_frost_shield";
     }
     private caster: CDOTA_BaseNPC_Hero
     private damage: number;
