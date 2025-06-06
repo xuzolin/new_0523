@@ -239,7 +239,7 @@ export class modifier_wudizhan extends BaseModifier {
 
         let trail_pfx = ParticleManager.CreateParticle("particles/units/heroes/hero_juggernaut/juggernaut_omni_slash_trail.vpcf", ParticleAttachment.ABSORIGIN, this.GetParent())
         ParticleManager.SetParticleControl(trail_pfx, 0, previous_position)
-        ParticleManager.SetParticleControl(trail_pfx, 1, this.target.GetOrigin())
+        ParticleManager.SetParticleControl(trail_pfx, 1, this.GetParent().GetOrigin())
         ParticleManager.ReleaseParticleIndex(trail_pfx)
         this.GetParent().EmitSound("Hero_Juggernaut.OmniSlash")
 
