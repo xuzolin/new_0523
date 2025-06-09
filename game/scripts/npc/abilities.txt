@@ -26,6 +26,12 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityCastRange" "700"
 		"AbilityCastPoint" "0.3000"
+		"Precache" {
+			"soundfile1" "soundevents/game_sounds_heroes/game_sounds_axe.vsndevts"
+			"soundfile2" "soundevents/game_sounds_heroes/game_sounds_axe.vsndevts"
+			"particle1" "particles/units/heroes/hero_axe/axe_counterhelix_ad.vpcf"
+			"particle2" "particles/units/heroes/hero_axe/axe_counterhelix_ad.vpcf"
+		}
 	}
 	"counter_helix_x" {
 		"BaseClass" "ability_lua"
@@ -39,9 +45,7 @@
 		"AbilityTextureName" "axe_counter_helix"
 		"AbilityUnitDamageType" "DAMAGE_TYPE_PURE"
 		"Precache" {
-	"soundfile"	"soundevents/game_sounds_heroes/game_sounds_axe.vsndevts"
-	"particle"	"particles/units/heroes/hero_axe/axe_counterhelix_ad.vpcf"
-}
+		}
 	}
 	"tiny_toss_x" {
 		"BaseClass" "ability_lua"
@@ -61,7 +65,6 @@
 		"AbilityCastRange" "1200"
 		"AbilityCastPoint" "0"
 		"Precache" {
-            "particle"  "particles/units/heroes/hero_tiny/tiny_toss_blur.vpcf"
 		}
 	}
 }

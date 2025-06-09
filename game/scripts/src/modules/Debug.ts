@@ -18,8 +18,12 @@ const DebugCallbacks: Record<string, { desc: string; func: DebugCallbackFunction
     ['-r']: {
         desc: '重载脚本',
         func: () => {
-            SendToConsole('script_reload');
-            SendToServerConsole('script_reload');
+            SendToConsole("cl_script_reload");
+            SendToConsole("script_reload");
+            SendToServerConsole("cl_script_reload");
+            SendToServerConsole("script_reload");
+            FireGameEvent("client_reload_game_keyvalues", {});
+            GameRules.Playtesting_UpdateAddOnKeyValues();
             print('-r 命令script_reload!重载脚本!');
         },
     },
@@ -135,7 +139,12 @@ export class Debug {
         }
 
         if (cmd === 'add') {
-            hero.AddAbility('dixuechongqun_swallowable')?.SetLevel(1);
+            // hero.AddAbility('suiliebingbao_swallowable')?.SetLevel(1);
+            // hero.AddAbility('bingshuangmodun_swallowable')?.SetLevel(1);
+            // hero.AddAbility('bingshuangxinxing_swallowable')?.SetLevel(1);
+            // hero.AddAbility('wudizhan_swallowable')?.SetLevel(1);
+            // hero.AddAbility('dixuechongqun_swallowable')?.SetLevel(1);
+            hero.AddAbility('huimieyinying_swallowable')?.SetLevel(1);
             hero.ModifyGold(9999, true, 0)
         }
 

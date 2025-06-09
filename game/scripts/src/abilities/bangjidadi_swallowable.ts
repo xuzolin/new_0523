@@ -2,18 +2,18 @@ import { BaseAbility, BaseModifier, registerAbility, registerModifier } from '..
 import { GetAbilityCooldown, GetAbilityValues } from '../utils/tstl-utils';
 
 @registerAbility()
-export class dixuechongqun_swallowable extends BaseAbility {
+export class bangjidadi_swallowable extends BaseAbility {
     GetBehavior(): AbilityBehavior | Uint64 {
         return AbilityBehavior.PASSIVE;
     }
 
     GetIntrinsicModifierName(): string {
-        return modifier_dixuechongqun_swallowable.name;
+        return modifier_bangjidadi_swallowable.name;
     }
 }
 //吞噬后的技能buff
 @registerModifier()
-export class modifier_dixuechongqun_swallowable extends BaseModifier {
+export class modifier_bangjidadi_swallowable extends BaseModifier {
     override IsHidden(): boolean {
         if (this.GetAbility()) {
             return true;
@@ -98,7 +98,7 @@ export class modifier_dixuechongqun_swallowable extends BaseModifier {
             );
 
             if (targets.length > 0) {
-                parent.AddNewModifier(this.GetCaster(), null, "modifier_dixuechongqun", {
+                parent.AddNewModifier(this.GetCaster(), null, "modifier_bangjidadi", {
                     duration: duration,
                     radius: radius,
                     aoe_radius: aoe_radius,
@@ -128,43 +128,8 @@ export class modifier_dixuechongqun_swallowable extends BaseModifier {
             // if (random <= 15) {
             // if (RollPercentage(15)) {
             if (RollPseudoRandomPercentage(50, PseudoRandom.CUSTOM_GENERIC, attacker)) {
-                //投射物
-                let projectile_speed = 1000;
-                let distance = 1000;
-                // let effectName = "particles/units/heroes/hero_vengeful/vengeful_wave_of_terror.vpcf";
-                // let effectName = "particles/units/heroes/hero_stormspirit/stormspirit_ball_lightning.vpcf";
+               
 
-                // let effectName = "particles/units/heroes/hero_death_prophet/death_prophet_carrion_swarm.vpcf";
-                let effectName = "particles/econ/items/death_prophet/death_prophet_acherontia/death_prophet_acher_swarm.vpcf";
-                // let effectName = "particles/hero_death_prophet/death_prophet_carrion_swarm.vpcf";
-                let direction = attacker.GetForwardVector();
-                let velocity = direction * projectile_speed as Vector;
-                let Ability = attacker.FindAbilityByName("custom_OnProjectileHit")
-                // print("Ability", Ability.GetAbilityName())
-                ProjectileManager.CreateLinearProjectile({
-                    Ability: Ability,
-                    EffectName: effectName,
-                    vSpawnOrigin: attacker.GetAbsOrigin(),
-                    fDistance: distance,
-                    // fMaxSpeed:1000,
-                    // iVisionRadius: 300,
-                    fStartRadius: 300,
-                    fEndRadius: 300,
-                    Source: attacker,
-                    bHasFrontalCone: false,
-                    // bReplaceExisting:false,
-                    iUnitTargetTeam: UnitTargetTeam.ENEMY,
-                    iUnitTargetFlags: UnitTargetFlags.NONE,
-                    iUnitTargetType: UnitTargetType.ALL,
-                    fExpireTime: GameRules.GetGameTime() + 5,
-                    vVelocity: velocity,
-                    bProvidesVision: false,
-                    ExtraData: {
-                        name: this.GetName(),
-                        danage: 100,
-                        damage_type: DamageTypes.MAGICAL,
-                    },
-                });
                 EmitSoundOn("Hero_DeathProphet.CarrionSwarm", attacker)
             }
 

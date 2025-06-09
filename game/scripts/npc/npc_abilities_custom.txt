@@ -206,4 +206,111 @@
             "particle4"									"particles/hero_death_prophet/death_prophet_carrion_swarm.vpcf"
 		}
 	}
+
+	// 毁灭阴影
+    "huimieyinying_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/huimieyinying_swallowable.lua"
+		"AbilityValues" {
+			"duration" "5"
+			"radius" "600"
+			"aoe_radius" "200"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "nevermore_shadowraze1"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile1"								"soundevents/game_sounds_heroes/game_sounds_juggernaut.vsndevts"
+			"particle1"									"particles/units/heroes/hero_death_prophet/death_prophet_carrion_swarm.vpcf"
+            "particle2"									"particles/units/heroes/hero_vengeful/vengeful_wave_of_terror.vpcf"
+            "particle3"									"particles/econ/items/death_prophet/death_prophet_acherontia/death_prophet_acher_swarm.vpcf"
+            "particle4"									"particles/hero_death_prophet/death_prophet_carrion_swarm.vpcf"
+		}
+	}
+
+	// 棒击大地
+    "bangjidadi_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/bangjidadi_swallowable.lua"
+		"AbilityValues" {
+			"duration" "5"
+			"radius" "600"
+			"aoe_radius" "200"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "nevermore_shadowraze1"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile1"								"soundevents/game_sounds_heroes/game_sounds_juggernaut.vsndevts"
+			"particle1"									"particles/units/heroes/hero_death_prophet/death_prophet_carrion_swarm.vpcf"
+            "particle2"									"particles/units/heroes/hero_vengeful/vengeful_wave_of_terror.vpcf"
+            "particle3"									"particles/econ/items/death_prophet/death_prophet_acherontia/death_prophet_acher_swarm.vpcf"
+            "particle4"									"particles/hero_death_prophet/death_prophet_carrion_swarm.vpcf"
+		}
+	}
+
+	// 阎刃
+    "yanren_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/yanren_swallowable.lua"
+		"AbilityValues" {
+			"duration" "5"
+			"radius" "600"
+			"aoe_radius" "200"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "nevermore_shadowraze1"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile1"								"soundevents/game_sounds_heroes/game_sounds_juggernaut.vsndevts"
+			"particle1"									"particles/units/heroes/hero_death_prophet/death_prophet_carrion_swarm.vpcf"
+            "particle2"									"particles/units/heroes/hero_vengeful/vengeful_wave_of_terror.vpcf"
+            "particle3"									"particles/econ/items/death_prophet/death_prophet_acherontia/death_prophet_acher_swarm.vpcf"
+            "particle4"									"particles/hero_death_prophet/death_prophet_carrion_swarm.vpcf"
+		}
+	}
+
+
 }

@@ -2,18 +2,18 @@ import { BaseAbility, BaseModifier, registerAbility, registerModifier } from '..
 import { GetAbilityCooldown, GetAbilityValues } from '../utils/tstl-utils';
 
 @registerAbility()
-export class dixuechongqun_swallowable extends BaseAbility {
+export class huimieyinying_swallowable extends BaseAbility {
     GetBehavior(): AbilityBehavior | Uint64 {
         return AbilityBehavior.PASSIVE;
     }
 
     GetIntrinsicModifierName(): string {
-        return modifier_dixuechongqun_swallowable.name;
+        return modifier_huimieyinying_swallowable.name;
     }
 }
 //吞噬后的技能buff
 @registerModifier()
-export class modifier_dixuechongqun_swallowable extends BaseModifier {
+export class modifier_huimieyinying_swallowable extends BaseModifier {
     override IsHidden(): boolean {
         if (this.GetAbility()) {
             return true;
@@ -21,7 +21,7 @@ export class modifier_dixuechongqun_swallowable extends BaseModifier {
         return false;
     }
     GetTexture() {
-        return "death_prophet_carrion_swarm";
+        return "nevermore_shadowraze1";
     }
 
     RemoveOnDeath(): boolean {
@@ -98,7 +98,7 @@ export class modifier_dixuechongqun_swallowable extends BaseModifier {
             );
 
             if (targets.length > 0) {
-                parent.AddNewModifier(this.GetCaster(), null, "modifier_dixuechongqun", {
+                parent.AddNewModifier(this.GetCaster(), null, "modifier_huimieyinying", {
                     duration: duration,
                     radius: radius,
                     aoe_radius: aoe_radius,
@@ -128,43 +128,65 @@ export class modifier_dixuechongqun_swallowable extends BaseModifier {
             // if (random <= 15) {
             // if (RollPercentage(15)) {
             if (RollPseudoRandomPercentage(50, PseudoRandom.CUSTOM_GENERIC, attacker)) {
-                //投射物
-                let projectile_speed = 1000;
-                let distance = 1000;
-                // let effectName = "particles/units/heroes/hero_vengeful/vengeful_wave_of_terror.vpcf";
-                // let effectName = "particles/units/heroes/hero_stormspirit/stormspirit_ball_lightning.vpcf";
-
-                // let effectName = "particles/units/heroes/hero_death_prophet/death_prophet_carrion_swarm.vpcf";
-                let effectName = "particles/econ/items/death_prophet/death_prophet_acherontia/death_prophet_acher_swarm.vpcf";
-                // let effectName = "particles/hero_death_prophet/death_prophet_carrion_swarm.vpcf";
                 let direction = attacker.GetForwardVector();
-                let velocity = direction * projectile_speed as Vector;
-                let Ability = attacker.FindAbilityByName("custom_OnProjectileHit")
-                // print("Ability", Ability.GetAbilityName())
-                ProjectileManager.CreateLinearProjectile({
-                    Ability: Ability,
-                    EffectName: effectName,
-                    vSpawnOrigin: attacker.GetAbsOrigin(),
-                    fDistance: distance,
-                    // fMaxSpeed:1000,
-                    // iVisionRadius: 300,
-                    fStartRadius: 300,
-                    fEndRadius: 300,
-                    Source: attacker,
-                    bHasFrontalCone: false,
-                    // bReplaceExisting:false,
-                    iUnitTargetTeam: UnitTargetTeam.ENEMY,
-                    iUnitTargetFlags: UnitTargetFlags.NONE,
-                    iUnitTargetType: UnitTargetType.ALL,
-                    fExpireTime: GameRules.GetGameTime() + 5,
-                    vVelocity: velocity,
-                    bProvidesVision: false,
-                    ExtraData: {
-                        name: this.GetName(),
-                        danage: 100,
-                        damage_type: DamageTypes.MAGICAL,
-                    },
-                });
+                let origin = attacker.GetAbsOrigin()
+                let radius = 150;//点位半径
+                let h_direction = RotatePosition(Vector(0, 0, 0), QAngle(0, 90, 0), direction)
+                let points: Vector[] = []
+                let point1 = origin + direction * radius + h_direction * radius as Vector;
+                let point2 = origin + direction * radius + h_direction * radius * -1 as Vector;
+                let point3 = origin + direction * radius * 3 + h_direction * radius * 2 as Vector;
+                let point4 = origin + direction * radius * 3 + h_direction * radius * 0 as Vector;
+                let point6 = origin + direction * radius * 3 + h_direction * radius * -2 as Vector;
+                let point7 = origin + direction * radius * 5 + h_direction * radius * 3 as Vector;
+                let point8 = origin + direction * radius * 5 + h_direction * radius * 1 as Vector;
+                let point9 = origin + direction * radius * 5 + h_direction * radius * -1 as Vector;
+                let point10 = origin + direction * radius * 5 + h_direction * radius * -3 as Vector;
+                points.push(point1)
+                points.push(point2)
+                points.push(point3)
+                points.push(point4)
+                points.push(point6)
+                points.push(point7)
+                points.push(point8)
+                points.push(point9)
+                points.push(point10)
+                for (const element of points) {
+                    let enemies = FindUnitsInRadius(
+                        attacker.GetTeamNumber(), // 敌人的队伍
+                        element, // 敌人的位置
+                        undefined,
+                        radius, // 查找范围
+                        UnitTargetTeam.ENEMY, // 查找敌人
+                        UnitTargetType.HERO + UnitTargetType.BASIC, // 查找英雄和小兵
+                        UnitTargetFlags.MAGIC_IMMUNE_ENEMIES, // 查找标志，对魔免单位也有效
+                        FindOrder.CLOSEST, // 查找顺序
+                        false
+                    )
+                    // 对每个敌人造成伤害
+                    enemies.forEach(enemy => {
+                        //计算伤害
+                        let damage = 100
+                        ApplyDamage({
+                            victim: enemy,
+                            attacker: this.GetCaster(),
+                            damage: damage,
+                            ability: this.GetAbility(),
+                            damage_type: DamageTypes.MAGICAL,
+                            damage_flags: DamageFlag.NONE,
+                        });
+             
+                    });
+
+                    let nova_pfx = ParticleManager.CreateParticle(
+                        "particles/units/heroes/hero_nevermore/nevermore_shadowraze.vpcf",
+                        ParticleAttachment.CUSTOMORIGIN, this.GetParent()
+                    )
+                    ParticleManager.SetParticleControl(nova_pfx, 0, element)
+                    ParticleManager.SetParticleControl(nova_pfx, 1, element)
+                    ParticleManager.ReleaseParticleIndex(nova_pfx)
+                }
+
                 EmitSoundOn("Hero_DeathProphet.CarrionSwarm", attacker)
             }
 
