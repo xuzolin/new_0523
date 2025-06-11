@@ -21,7 +21,7 @@ export class modifier_bangjidadi_swallowable extends BaseModifier {
         return false;
     }
     GetTexture() {
-        return "death_prophet_carrion_swarm";
+        return "monkey_king_boundless_strike";
     }
 
     RemoveOnDeath(): boolean {
@@ -128,9 +128,52 @@ export class modifier_bangjidadi_swallowable extends BaseModifier {
             // if (random <= 15) {
             // if (RollPercentage(15)) {
             if (RollPseudoRandomPercentage(50, PseudoRandom.CUSTOM_GENERIC, attacker)) {
-               
+                let distance = 1200;
+                let direction = attacker.GetForwardVector();
+                let start_point = attacker.GetAbsOrigin()
+                let ent_point = start_point + direction * distance as Vector
+
+                let units = FindUnitsInLine(
+                    attacker.GetTeamNumber(),
+                    start_point,
+                    ent_point,
+                    undefined,
+                    100,
+                    UnitTargetTeam.ENEMY,
+                    UnitTargetType.HERO + UnitTargetType.BASIC,
+                    UnitTargetFlags.NONE,
+                )
+                for (let unit of units) {
+                    let damage = 100
+                    ApplyDamage({
+                        victim: unit,
+                        attacker: this.GetCaster(),
+                        damage: damage,
+                        ability: this.GetAbility(),
+                        damage_type: DamageTypes.MAGICAL,
+                        damage_flags: DamageFlag.NONE,
+                    });
+                }
+                // let strike_cast = ParticleManager.CreateParticle(
+                //     "particles/units/heroes/hero_monkey_king/monkey_king_strike_cast.vpcf",
+                //     ParticleAttachment.POINT_FOLLOW, this.GetParent()
+                // )
+                // // ParticleManager.SetParticleControl(strike_cast, 0, start_point)
+                // // ParticleManager.SetParticleControl(strike_cast, 1, ent_point)
+                // ParticleManager.ReleaseParticleIndex(strike_cast)
+
+                let nova_pfx = ParticleManager.CreateParticle(
+                    "particles/units/heroes/hero_monkey_king/monkey_king_strike.vpcf",
+                    ParticleAttachment.POINT_FOLLOW, this.GetParent()
+                )
+                ParticleManager.SetParticleControl(nova_pfx, 0, start_point)
+                // ParticleManager.SetParticleControlEnt(nova_pfx, 0, this.GetParent(), ParticleAttachment.ABSORIGIN, undefined, start_point, true);
+                ParticleManager.SetParticleControl(nova_pfx, 1, ent_point)
+                ParticleManager.SetParticleControl(nova_pfx, 2, ent_point)
+                ParticleManager.ReleaseParticleIndex(nova_pfx)
 
                 EmitSoundOn("Hero_DeathProphet.CarrionSwarm", attacker)
+
             }
 
         }

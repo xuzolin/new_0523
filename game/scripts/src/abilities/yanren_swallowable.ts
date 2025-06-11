@@ -21,7 +21,7 @@ export class modifier_yanren_swallowable extends BaseModifier {
         return false;
     }
     GetTexture() {
-        return "death_prophet_carrion_swarm";
+        return "doom_bringer_infernal_blade";
     }
 
     RemoveOnDeath(): boolean {
@@ -123,12 +123,50 @@ export class modifier_yanren_swallowable extends BaseModifier {
     OnAttack(event: ModifierAttackEvent) {
         if (event.attacker == this.GetParent()) {
             let attacker = event.attacker as CDOTA_BaseNPC;
+            let target = event.target as CDOTA_BaseNPC;
+
             //概率释放
             // let random = RandomInt(1, 100)
             // if (random <= 15) {
             // if (RollPercentage(15)) {
             if (RollPseudoRandomPercentage(50, PseudoRandom.CUSTOM_GENERIC, attacker)) {
-             
+                let radius = 500;
+                let enemies = FindUnitsInRadius(
+                    attacker.GetTeamNumber(), // 敌人的队伍
+                    target.GetAbsOrigin(), // 敌人的位置
+                    undefined,
+                    radius, // 查找范围
+                    UnitTargetTeam.ENEMY, // 查找敌人
+                    UnitTargetType.HERO + UnitTargetType.BASIC, // 查找英雄和小兵
+                    UnitTargetFlags.MAGIC_IMMUNE_ENEMIES, // 查找标志，对魔免单位也有效
+                    FindOrder.CLOSEST, // 查找顺序
+                    false
+                )
+                // 对每个敌人造成伤害
+                enemies.forEach(enemy => {
+                    //计算伤害
+                    let damage = 100
+                    ApplyDamage({
+                        victim: enemy,
+                        attacker: this.GetCaster(),
+                        damage: damage,
+                        ability: this.GetAbility(),
+                        damage_type: DamageTypes.MAGICAL,
+                        damage_flags: DamageFlag.NONE,
+                    });
+         
+                });
+
+                let ParticleID = ParticleManager.CreateParticle(
+                    "particles/units/heroes/hero_doom_bringer/doom_bringer_lvl_death.vpcf",
+                    ParticleAttachment.POINT_FOLLOW, target
+                )
+                // ParticleManager.SetParticleControl(ParticleID, 0, start_point)
+                // // ParticleManager.SetParticleControlEnt(nova_pfx, 0, this.GetParent(), ParticleAttachment.ABSORIGIN, undefined, start_point, true);
+                // ParticleManager.SetParticleControl(ParticleID, 1, ent_point)
+                // ParticleManager.SetParticleControl(ParticleID, 2, ent_point)
+                ParticleManager.ReleaseParticleIndex(ParticleID)
+
                 EmitSoundOn("Hero_DeathProphet.CarrionSwarm", attacker)
             }
 
