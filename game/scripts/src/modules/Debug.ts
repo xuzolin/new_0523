@@ -147,16 +147,27 @@ export class Debug {
             // hero.AddAbility('huimieyinying_swallowable')?.SetLevel(1);
             // hero.AddAbility('bangjidadi_swallowable')?.SetLevel(1);
             // hero.AddAbility('yanren_swallowable')?.SetLevel(1);
-            hero.AddAbility('heidong_swallowable')?.SetLevel(1);
+            // hero.AddAbility('heidong_swallowable')?.SetLevel(1);
+            hero.AddAbility('taixuzhen_swallowable')?.SetLevel(1);
 
 
             hero.ModifyGold(9999, true, 0)
         }
 
         if (cmd === 'tt') {
-            hero.RemoveAbility("dixuechongqun_swallowable")
-            hero.AddNewModifier(hero, undefined, "modifier_dixuechongqun_swallowable", {});
+            hero.RemoveAbility("taixuzhen_swallowable")
+            hero.AddNewModifier(hero, undefined, "modifier_taixuzhen_swallowable", {});
         }
+
+        if (cmd === 'rot') {
+            const originalPoint = Vector(2, 2, 0);
+            const rotationAngle = QAngle(0, 90, 0); //角度
+            const centerPoint = Vector(0, 0, 0);
+            const rotatedPoint = RotatePosition(centerPoint, rotationAngle, originalPoint);
+            print("RotatePosition", rotatedPoint);// 2 0 0
+        }
+
+
 
     }
 }

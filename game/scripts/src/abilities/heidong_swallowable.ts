@@ -291,6 +291,7 @@ export class modifier_heidong extends BaseModifier {
             let direction = (enemy.GetAbsOrigin() - location as Vector).Normalized()
             let distance = (enemy.GetAbsOrigin() - location as Vector).Length2D()
             enemy.SetOrigin(enemy.GetAbsOrigin() - direction * distance * 0.5 as Vector)
+            // print("OnIntervalThink", direction * distance)
         });
     }
 
@@ -322,7 +323,7 @@ export class modifier_heidong extends BaseModifier {
 export class modifier_heidong_aura_debuff extends BaseModifier {
     IsHidden(): boolean {
         return true;
-    } 
+    }
     IsDebuff(): boolean {
         return true
     }
@@ -336,6 +337,6 @@ export class modifier_heidong_aura_debuff extends BaseModifier {
             [ModifierState.NO_UNIT_COLLISION]: true,
         };
     }
-}    
+}
 
 

@@ -342,6 +342,39 @@
             "particle2"									""
 		}
 	}
+	//太虚阵五星
+	"taixuzhen_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/taixuzhen_swallowable.lua"
+		"AbilityValues" {
+			"duration" "5"
+			"radius" "600"
+			"aoe_radius" "500"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "enigma_black_hole"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile1"								"soundevents/game_sounds_heroes/game_sounds_void_spirit.vsndevts"
+			"particle1"									"particles/units/heroes/hero_void_spirit/astral_step/void_spirit_astral_step.vpcf"
+            "particle2"									"particles/units/heroes/hero_void_spirit/dissimilate/void_spirit_dissimilate.vpcf"
+            "particle3"									"particles/units/heroes/hero_void_spirit/dissimilate/void_spirit_dissimilate_dmg.vpcf"
+		}
+	}
 
 
 }
