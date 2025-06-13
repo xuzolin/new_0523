@@ -143,20 +143,22 @@ export class Debug {
             // hero.AddAbility('bingshuangmodun_swallowable')?.SetLevel(1);
             // hero.AddAbility('bingshuangxinxing_swallowable')?.SetLevel(1);
             // hero.AddAbility('wudizhan_swallowable')?.SetLevel(1);
+
             // hero.AddAbility('dixuechongqun_swallowable')?.SetLevel(1);
             // hero.AddAbility('huimieyinying_swallowable')?.SetLevel(1);
             // hero.AddAbility('bangjidadi_swallowable')?.SetLevel(1);
             // hero.AddAbility('yanren_swallowable')?.SetLevel(1);
             // hero.AddAbility('heidong_swallowable')?.SetLevel(1);
-            hero.AddAbility('taixuzhen_swallowable')?.SetLevel(1);
+            // hero.AddAbility('taixuzhen_swallowable')?.SetLevel(1);
+            hero.AddAbility('shijiansuoding_swallowable')?.SetLevel(1);
 
 
             hero.ModifyGold(9999, true, 0)
         }
 
-        if (cmd === 'tt') {
-            hero.RemoveAbility("taixuzhen_swallowable")
-            hero.AddNewModifier(hero, undefined, "modifier_taixuzhen_swallowable", {});
+        if (cmd === 'ts') {
+            hero.RemoveAbility("dixuechongqun_swallowable")
+            hero.AddNewModifier(hero, undefined, "modifier_" + "dixuechongqun_swallowable", {});
         }
 
         if (cmd === 'rot') {
@@ -167,6 +169,9 @@ export class Debug {
             print("RotatePosition", rotatedPoint);// 2 0 0
         }
 
+        if (cmd === 'test') {
+            hero.AddNewModifier(hero, undefined, "modifier_stunned", { duration: 10 });
+        }
 
 
     }

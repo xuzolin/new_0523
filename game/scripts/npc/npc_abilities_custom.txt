@@ -235,10 +235,8 @@
 		"precache"
 		{
 			"soundfile1"								"soundevents/game_sounds_heroes/game_sounds_juggernaut.vsndevts"
-			"particle1"									"particles/units/heroes/hero_death_prophet/death_prophet_carrion_swarm.vpcf"
-            "particle2"									"particles/units/heroes/hero_vengeful/vengeful_wave_of_terror.vpcf"
-            "particle3"									"particles/econ/items/death_prophet/death_prophet_acherontia/death_prophet_acher_swarm.vpcf"
-            "particle4"									"particles/hero_death_prophet/death_prophet_carrion_swarm.vpcf"
+			"particle1"									"particles/units/heroes/hero_nevermore/nevermore_shadowraze.vpcf"
+            "particle2"									""
 		}
 	}
 
@@ -303,10 +301,9 @@
 		"precache"
 		{
 			"soundfile1"								"soundevents/game_sounds_heroes/game_sounds_juggernaut.vsndevts"
-			"particle1"									"particles/units/heroes/hero_death_prophet/death_prophet_carrion_swarm.vpcf"
-            "particle2"									"particles/units/heroes/hero_vengeful/vengeful_wave_of_terror.vpcf"
-            "particle3"									"particles/econ/items/death_prophet/death_prophet_acherontia/death_prophet_acher_swarm.vpcf"
-            "particle4"									"particles/hero_death_prophet/death_prophet_carrion_swarm.vpcf"
+			"particle1"									"particles/units/heroes/hero_doom_bringer/doom_bringer_lvl_death.vpcf"
+            "particle2"									""
+            "particle3"									""
 		}
 	}
 
@@ -358,7 +355,7 @@
 		"MaxLevel" "4"
 		"AbilityCooldown" "10"
 		"AbilityManaCost" "0"
-		"AbilityTextureName" "enigma_black_hole"
+		"AbilityTextureName" "void_spirit_astral_step"
 		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
 		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
 		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
@@ -373,6 +370,39 @@
 			"particle1"									"particles/units/heroes/hero_void_spirit/astral_step/void_spirit_astral_step.vpcf"
             "particle2"									"particles/units/heroes/hero_void_spirit/dissimilate/void_spirit_dissimilate.vpcf"
             "particle3"									"particles/units/heroes/hero_void_spirit/dissimilate/void_spirit_dissimilate_dmg.vpcf"
+		}
+	}
+	//时间锁定
+	"shijiansuoding_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/shijiansuoding_swallowable.lua"
+		"AbilityValues" {
+			"duration" "5"
+			"radius" "600"
+			"aoe_radius" "500"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "faceless_void_time_lock"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile1"								"soundevents/game_sounds_heroes/game_sounds_void_spirit.vsndevts"
+			"particle1"									"particles/units/heroes/hero_faceless_void/faceless_void_time_lock_bash.vpcf"
+            "particle2"									""
+            "particle3"									""
 		}
 	}
 

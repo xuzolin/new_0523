@@ -21,8 +21,7 @@ export class modifier_taixuzhen_swallowable extends BaseModifier {
         return false;
     }
     GetTexture() {
-        return "juggernaut_omni_slash";
-        // return "attr_damage";
+        return "void_spirit_astral_step";
     }
 
     RemoveOnDeath(): boolean {

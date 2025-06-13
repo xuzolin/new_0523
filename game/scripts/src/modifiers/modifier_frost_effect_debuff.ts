@@ -23,6 +23,10 @@ export class modifier_frost_effect_debuff extends BaseModifier {
         return "attr_damage";
     }
 
+    // GetAttributes() {
+    //     return ModifierAttribute.MULTIPLE
+    // }
+
     OnCreated(params: object): void {
         let caster = this.GetCaster();
         let parent = this.GetParent();

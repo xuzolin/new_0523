@@ -2,18 +2,18 @@ import { BaseAbility, BaseModifier, registerAbility, registerModifier } from '..
 import { GetAbilityCooldown, GetAbilityValues } from '../utils/tstl-utils';
 
 @registerAbility()
-export class dixuechongqun_swallowable extends BaseAbility {
+export class shijiansuoding_swallowable extends BaseAbility {
     GetBehavior(): AbilityBehavior | Uint64 {
         return AbilityBehavior.PASSIVE;
     }
 
     GetIntrinsicModifierName(): string {
-        return modifier_dixuechongqun_swallowable.name;
+        return modifier_shijiansuoding_swallowable.name;
     }
 }
 //吞噬后的技能buff
 @registerModifier()
-export class modifier_dixuechongqun_swallowable extends BaseModifier {
+export class modifier_shijiansuoding_swallowable extends BaseModifier {
     override IsHidden(): boolean {
         if (this.GetAbility()) {
             return true;
@@ -21,7 +21,7 @@ export class modifier_dixuechongqun_swallowable extends BaseModifier {
         return false;
     }
     GetTexture() {
-        return "death_prophet_carrion_swarm";
+        return "faceless_void_time_lock";
     }
 
     RemoveOnDeath(): boolean {
@@ -61,7 +61,6 @@ export class modifier_dixuechongqun_swallowable extends BaseModifier {
         // print("OnCreated", this.damage_int_mult)
         // print("OnCreated", this.damage_frost_mult)
         // print("OnCreated", this.frost_stack)
-        print("modifier_dixuechongqun_swallowable")
     }
 
     DeclareFunctions() {
@@ -99,7 +98,7 @@ export class modifier_dixuechongqun_swallowable extends BaseModifier {
             );
 
             if (targets.length > 0) {
-                parent.AddNewModifier(this.GetCaster(), null, "modifier_dixuechongqun", {
+                parent.AddNewModifier(this.GetCaster(), null, "modifier_shijiansuoding", {
                     duration: duration,
                     radius: radius,
                     aoe_radius: aoe_radius,
@@ -129,44 +128,50 @@ export class modifier_dixuechongqun_swallowable extends BaseModifier {
             // if (random <= 15) {
             // if (RollPercentage(15)) {
             if (RollPseudoRandomPercentage(50, PseudoRandom.CUSTOM_GENERIC, attacker)) {
-                print("modifier_dixuechongqun_swallowable")
-                //投射物
-                let projectile_speed = 1000;
-                let distance = 1000;
-                // let effectName = "particles/units/heroes/hero_vengeful/vengeful_wave_of_terror.vpcf";
-                // let effectName = "particles/units/heroes/hero_stormspirit/stormspirit_ball_lightning.vpcf";
-
-                // let effectName = "particles/units/heroes/hero_death_prophet/death_prophet_carrion_swarm.vpcf";
-                let effectName = "particles/econ/items/death_prophet/death_prophet_acherontia/death_prophet_acher_swarm.vpcf";
-                // let effectName = "particles/hero_death_prophet/death_prophet_carrion_swarm.vpcf";
                 let direction = attacker.GetForwardVector();
-                let velocity = direction * projectile_speed as Vector;
-                let Ability = attacker.FindAbilityByName("custom_OnProjectileHit")
-                // print("Ability", Ability.GetAbilityName())
-                ProjectileManager.CreateLinearProjectile({
-                    Ability: Ability,
-                    EffectName: effectName,
-                    vSpawnOrigin: attacker.GetAbsOrigin(),
-                    fDistance: distance,
-                    // fMaxSpeed:1000,
-                    // iVisionRadius: 300,
-                    fStartRadius: 300,
-                    fEndRadius: 300,
-                    Source: attacker,
-                    bHasFrontalCone: false,
-                    // bReplaceExisting:false,
-                    iUnitTargetTeam: UnitTargetTeam.ENEMY,
-                    iUnitTargetFlags: UnitTargetFlags.NONE,
-                    iUnitTargetType: UnitTargetType.ALL,
-                    fExpireTime: GameRules.GetGameTime() + 5,
-                    vVelocity: velocity,
-                    bProvidesVision: false,
-                    ExtraData: {
-                        name: this.GetName(),
-                        danage: 100,
-                        damage_type: DamageTypes.MAGICAL,
-                    },
+                let origin = attacker.GetAbsOrigin()
+                let tTargets = FindUnitsInRadius(
+                    attacker.GetTeamNumber(),
+                    attacker.GetAbsOrigin(),
+                    null,
+                    500,
+                    UnitTargetTeam.ENEMY,
+                    UnitTargetType.ALL,
+                    UnitTargetFlags.NONE,
+                    FindOrder.CLOSEST,
+                    false,
+                );
+
+                tTargets = tTargets.filter(unit => {
+                    //获取前方一定角度的范围内的敌人
+                    let facing_direction = attacker.GetAnglesAsVector().y;
+                    let unit_vector = ((unit.GetOrigin() - attacker.GetOrigin()) as Vector).Normalized();
+                    let unit_direction = VectorToAngles(unit_vector).y;
+                    let angle_diff = AngleDiff(facing_direction, unit_direction);
+                    angle_diff = math.abs(angle_diff);
+                    //前方左右各30度
+                    if (angle_diff < 45) return unit;
                 });
+
+                for (const target of tTargets) {
+                    let damage = 100
+                    ApplyDamage({
+                        victim: target,
+                        attacker: this.GetCaster(),
+                        damage: damage,
+                        ability: this.GetAbility(),
+                        damage_type: DamageTypes.MAGICAL,
+                        damage_flags: DamageFlag.NONE,
+                    });
+                    // -- Prepare for the second attack
+                    let particle = ParticleManager.CreateParticle("particles/units/heroes/hero_faceless_void/faceless_void_time_lock_bash.vpcf",
+                        ParticleAttachment.CUSTOMORIGIN, null)
+                    ParticleManager.SetParticleControl(particle, 0, target.GetAbsOrigin())
+                    ParticleManager.SetParticleControl(particle, 1, target.GetAbsOrigin())
+                    ParticleManager.SetParticleControlEnt(particle, 2, attacker, ParticleAttachment.CUSTOMORIGIN, "attach_hitloc", target.GetAbsOrigin(), true)
+                    ParticleManager.ReleaseParticleIndex(particle)
+                }
+
                 EmitSoundOn("Hero_DeathProphet.CarrionSwarm", attacker)
             }
 
