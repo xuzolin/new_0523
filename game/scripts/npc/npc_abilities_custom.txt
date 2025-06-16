@@ -31,7 +31,7 @@
 			}
 		}
 	}
-	
+
 	//投射物碰撞通用技能
 	"custom_OnProjectileHit"
     {
@@ -451,7 +451,42 @@
 		"MaxLevel" "4"
 		"AbilityCooldown" "5"
 		"AbilityManaCost" "0"
-		"AbilityTextureName" "faceless_void_time_lock"
+		"AbilityTextureName" "shredder_chakram"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile1"								"soundevents/game_sounds_heroes/game_sounds_shredder.vsndevts"
+			"particle1"									"particles/units/heroes/hero_shredder/shredder_chakram.vpcf"
+            "particle2"									"particles/econ/items/shredder/hero_shredder_icefx/shredder_chakram_ice.vpcf"
+            "particle3"									"particles/econ/items/shredder/hero_shredder_icefx/shredder_chakram_stay_ice.vpcf"
+            "particle4"									"particles/units/heroes/hero_shredder/shredder_chakram_stay.vpcf"
+		}
+	}
+
+	//陨石
+	"yunshi_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/yunshi_swallowable.lua"
+		"AbilityValues" {
+			"duration" "2"
+			"radius" "600"
+			"aoe_radius" "500"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "5"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "invoker_chaos_meteor"
 		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
 		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
 		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
@@ -463,10 +498,9 @@
 		"precache"
 		{
 			"soundfile1"								"soundevents/game_sounds_heroes/game_sounds_void_spirit.vsndevts"
-			"particle1"									"particles/units/heroes/hero_shredder/shredder_chakram.vpcf"
-            "particle2"									"particles/econ/items/shredder/hero_shredder_icefx/shredder_chakram_ice.vpcf"
-            "particle3"									"particles/econ/items/shredder/hero_shredder_icefx/shredder_chakram_stay_ice.vpcf"
-            "particle4"									"particles/units/heroes/hero_shredder/shredder_chakram_stay.vpcf"
+			"particle1"									"particles/units/heroes/hero_invoker/invoker_chaos_meteor.vpcf"
+            "particle2"									"particles/units/heroes/hero_invoker/invoker_chaos_meteor_fly.vpcf"
+            "particle3"									""
 		}
 	}
 

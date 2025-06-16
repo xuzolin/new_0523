@@ -21,7 +21,7 @@ export class modifier_liehuochilun_swallowable extends BaseModifier {
         return false;
     }
     GetTexture() {
-        return "doom_bringer_infernal_blade";
+        return "shredder_chakram";
     }
 
     RemoveOnDeath(): boolean {
@@ -101,7 +101,7 @@ export class modifier_liehuochilun_swallowable extends BaseModifier {
                 // 计算每个粒子的角度（均匀分布）初始角度
                 let angle = (i - 1) * (2 * Math.PI / spirit_count);
 
-                print(angle, VectorToAngles(direction).y)
+                // print(angle, VectorToAngles(direction).y)
 
                 let Thinker = CreateModifierThinker(parent, null, "modifier_liehuochilun", {
                     duration: duration,
@@ -113,6 +113,8 @@ export class modifier_liehuochilun_swallowable extends BaseModifier {
                     false,
                 );
             }
+
+            parent.EmitSound("Hero_Shredder.Chakram.Cast")
 
             //重置cd
             this.cd_remaining = cd
