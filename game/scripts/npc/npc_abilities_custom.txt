@@ -504,5 +504,39 @@
 		}
 	}
 
+	//痛苦尖叫
+	"tongkujianjiao_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/tongkujianjiao_swallowable.lua"
+		"AbilityValues" {
+			"duration" "2"
+			"radius" "600"
+			"aoe_radius" "500"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "5"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "queenofpain_scream_of_pain"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile1"								"soundevents/game_sounds_heroes/game_sounds_queenofpain.vsndevts"
+			"particle1"									"particles/units/heroes/hero_queenofpain/queen_scream_of_pain.vpcf"
+            "particle2"									"particles/units/heroes/hero_queenofpain/queen_scream_of_pain_owner.vpcf"
+            "particle3"									""
+		}
+	}
+
 
 }
