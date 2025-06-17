@@ -537,6 +537,73 @@
             "particle3"									""
 		}
 	}
+	//"烟幕"
+	"yanmu_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/yanmu_swallowable.lua"
+		"AbilityValues" {
+			"duration" "2"
+			"radius" "600"
+			"aoe_radius" "500"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "5"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "riki_smoke_screen"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_riki.vsndevts"
+			"particle1"					"particles/units/heroes/hero_riki/riki_smokebomb_smoke.vpcf"
+			"particle2"					"particles/units/heroes/hero_riki/riki_smokebomb.vpcf"
+			"particle3"					"particles/econ/items/riki/riki_head_ti8/riki_smokebomb_ti8.vpcf"
+		}
+	}
+
+	//数箭齐发
+	"shujianqifa_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/shujianqifa_swallowable.lua"
+		"AbilityValues" {
+			"duration" "2"
+			"radius" "600"
+			"aoe_radius" "500"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "5"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "drow_ranger_multishot"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_drowranger.vsndevts"
+			"particle1"					"particles/econ/items/drow/drow_arcana/drow_arcana_shard_v2_hypothermia_projectile.vpcf"
+			"particle2"					"particles/units/heroes/hero_drow/drow_multishot_proj_linear_proj.vpcf"
+			"particle3"					"particles/econ/items/windrunner/windranger_arcana/windranger_arcana_spell_powershot.vpcf"
+		}
+	}
 
 
 }

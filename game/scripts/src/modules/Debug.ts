@@ -153,7 +153,9 @@ export class Debug {
             // hero.AddAbility('shijiansuoding_swallowable')?.SetLevel(1);
             // hero.AddAbility('liehuochilun_swallowable')?.SetLevel(1);
             // hero.AddAbility('yunshi_swallowable')?.SetLevel(1);
-            hero.AddAbility('tongkujianjiao_swallowable')?.SetLevel(1);
+            // hero.AddAbility('tongkujianjiao_swallowable')?.SetLevel(1);
+            // hero.AddAbility('yanmu_swallowable')?.SetLevel(1);
+            hero.AddAbility('shujianqifa_swallowable')?.SetLevel(1);
 
 
             hero.ModifyGold(9999, true, 0)
