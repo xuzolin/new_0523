@@ -605,5 +605,39 @@
 		}
 	}
 
+	//圣光盾-神秘之耀
+	"shengguangdun_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/shengguangdun_swallowable.lua"
+		"AbilityValues" {
+			"duration" "5"
+			"radius" "600"
+			"aoe_radius" "100"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "skywrath_mage_mystic_flare"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_drowranger.vsndevts"
+			"particle1"					"particles/units/heroes/hero_skywrath_mage/skywrath_mage_mystic_flare_ambient.vpcf"
+			"particle2"					"particles/units/heroes/hero_skywrath_mage/skywrath_mage_mystic_flare.vpcf"
+			"particle3"					"particles/units/heroes/hero_zeus/zeus_cloud.vpcf"
+		}
+	}
+
 
 }

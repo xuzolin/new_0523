@@ -78,7 +78,7 @@ export class modifier_bingshuangmodun_swallowable extends BaseModifier {
         this.cd_remaining -= this.interval
         if (this.cd_remaining <= 0 && parent.IsAlive()) {
             //释放技能
-            parent.AddNewModifier(this.GetCaster(), null, "modifier_bingshuangmodun", {
+            parent.AddNewModifier(parent, null, "modifier_bingshuangmodun", {
                 duration: duration,
                 radius: radius,
                 aoe_radius: aoe_radius,
