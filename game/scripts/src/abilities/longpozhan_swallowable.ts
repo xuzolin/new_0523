@@ -2,18 +2,18 @@ import { BaseAbility, BaseModifier, registerAbility, registerModifier } from '..
 import { GetAbilityCooldown, GetAbilityValues } from '../utils/tstl-utils';
 
 @registerAbility()
-export class dixuechongqun_swallowable extends BaseAbility {
+export class longpozhan_swallowable extends BaseAbility {
     GetBehavior(): AbilityBehavior | Uint64 {
         return AbilityBehavior.PASSIVE;
     }
 
     GetIntrinsicModifierName(): string {
-        return modifier_dixuechongqun_swallowable.name;
+        return modifier_longpozhan_swallowable.name;
     }
 }
 //吞噬后的技能buff
 @registerModifier()
-export class modifier_dixuechongqun_swallowable extends BaseModifier {
+export class modifier_longpozhan_swallowable extends BaseModifier {
     override IsHidden(): boolean {
         if (this.GetAbility()) {
             return true;
@@ -21,7 +21,7 @@ export class modifier_dixuechongqun_swallowable extends BaseModifier {
         return false;
     }
     GetTexture() {
-        return "death_prophet_carrion_swarm";
+        return "lina_dragon_slave";
     }
 
     RemoveOnDeath(): boolean {
@@ -98,7 +98,7 @@ export class modifier_dixuechongqun_swallowable extends BaseModifier {
             );
 
             if (targets.length > 0) {
-                parent.AddNewModifier(this.GetCaster(), null, "modifier_dixuechongqun", {
+                parent.AddNewModifier(this.GetCaster(), null, "modifier_longpozhan", {
                     duration: duration,
                     radius: radius,
                     aoe_radius: aoe_radius,
@@ -128,16 +128,10 @@ export class modifier_dixuechongqun_swallowable extends BaseModifier {
             // if (random <= 15) {
             // if (RollPercentage(15)) {
             if (RollPseudoRandomPercentage(50, PseudoRandom.CUSTOM_GENERIC, attacker)) {
-                print("modifier_dixuechongqun_swallowable")
                 //投射物
                 let projectile_speed = 1000;
-                let distance = 1000;
-                // let effectName = "particles/units/heroes/hero_vengeful/vengeful_wave_of_terror.vpcf";
-                // let effectName = "particles/units/heroes/hero_stormspirit/stormspirit_ball_lightning.vpcf";
-
-                // let effectName = "particles/units/heroes/hero_death_prophet/death_prophet_carrion_swarm.vpcf";
-                let effectName = "particles/econ/items/death_prophet/death_prophet_acherontia/death_prophet_acher_swarm.vpcf";
-                // let effectName = "particles/hero_death_prophet/death_prophet_carrion_swarm.vpcf";
+                let distance = 800;
+                let effectName = "particles/units/heroes/hero_lina/lina_spell_dragon_slave.vpcf";
                 let direction = attacker.GetForwardVector();
                 let velocity = direction * projectile_speed as Vector;
                 let Ability = attacker.FindAbilityByName("custom_OnProjectileHit")
@@ -166,7 +160,8 @@ export class modifier_dixuechongqun_swallowable extends BaseModifier {
                         damage_type: DamageTypes.MAGICAL,
                     },
                 });
-                EmitSoundOn("Hero_DeathProphet.CarrionSwarm", attacker)
+                // EmitSoundOn("Hero_DeathProphet.CarrionSwarm", attacker)
+                attacker.EmitSound("Hero_Lina.DragonSlave")
             }
 
         }

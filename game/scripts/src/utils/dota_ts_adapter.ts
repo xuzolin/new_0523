@@ -110,7 +110,7 @@ export const registerModifier = (name?: string) => (modifier: new () => CDOTA_Mo
 
         base = base.____super;
     }
-
+    // print("registerModifier",name, fileName, type)
     LinkLuaModifier(name, fileName, type);
 };
 

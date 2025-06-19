@@ -639,5 +639,73 @@
 		}
 	}
 
+	//龙破斩
+	"longpozhan_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/longpozhan_swallowable.lua"
+		"AbilityValues" {
+			"duration" "5"
+			"radius" "600"
+			"aoe_radius" "100"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "lina_dragon_slave"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_lina.vsndevts"
+			"particle1"					"particles/units/heroes/hero_lina/lina_spell_dragon_slave.vpcf"
+			"particle2"					""
+			"particle3"					""
+		}
+	}
+
+	//地震
+	"dizhen_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/dizhen_swallowable.lua"
+		"AbilityValues" {
+			"duration" "5"
+			"radius" "600"
+			"aoe_radius" "300"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "sandking_epicenter"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_sandking.vsndevts"
+			"particle1"					"particles/units/heroes/hero_sandking/sandking_epicenter.vpcf"
+			"particle2"					""
+			"particle3"					""
+		}
+	}
+
 
 }
