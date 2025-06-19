@@ -157,7 +157,8 @@ export class Debug {
             // hero.AddAbility('shujianqifa_swallowable')?.SetLevel(1);
             // hero.AddAbility('shengguangdun_swallowable')?.SetLevel(1);
             // hero.AddAbility('longpozhan_swallowable')?.SetLevel(1);
-            hero.AddAbility('dizhen_swallowable')?.SetLevel(1);
+            // hero.AddAbility('dizhen_swallowable')?.SetLevel(1);
+            hero.AddAbility('fanjiluoxuan_swallowable')?.SetLevel(1);
 
 
 
