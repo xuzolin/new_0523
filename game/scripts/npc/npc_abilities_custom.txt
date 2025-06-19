@@ -605,11 +605,11 @@
 		}
 	}
 
-	//圣光盾-神秘之耀
-	"shengguangdun_swallowable"
+	//圣光阵-神秘之耀
+	"shengguangzhen_swallowable"
     {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "abilities/shengguangdun_swallowable.lua"
+		"ScriptFile" "abilities/shengguangzhen_swallowable"
 		"AbilityValues" {
 			"duration" "5"
 			"radius" "600"
@@ -711,11 +711,45 @@
 	"fanjiluoxuan_swallowable"
     {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "abilities/fanjiluoxuan_swallowable.lua"
+		"ScriptFile" "abilities/fanjiluoxuan_swallowable"
 		"AbilityValues" {
 			"duration" "5"
 			"radius" "600"
 			"aoe_radius" "300"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "axe_counter_helix"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_axe.vsndevts"
+			"particle1"					"particles/units/heroes/hero_axe/axe_counterhelix_ad.vpcf"
+			"particle2"					"particles/units/heroes/hero_axe/axe_attack_blur_counterhelix.vpcf"
+			"particle3"					""
+		}
+	}
+
+	//冰魄阵
+	"bingpozhen_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/bingpozhen_swallowable"
+		"AbilityValues" {
+			"duration" "5"
+			"radius" "600"
+			"aoe_radius" "350"
             "damage_int_mult" "20"
 			"damage_frost_mult" "50"
             "frost_stack" "3"

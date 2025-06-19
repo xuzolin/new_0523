@@ -2,18 +2,18 @@ import { BaseAbility, BaseModifier, registerAbility, registerModifier } from '..
 import { GetAbilityCooldown, GetAbilityValues } from '../utils/tstl-utils';
 
 @registerAbility()
-export class shengguangdun_swallowable extends BaseAbility {
+export class shengguangzhen_swallowable extends BaseAbility {
     GetBehavior(): AbilityBehavior | Uint64 {
         return AbilityBehavior.PASSIVE;
     }
 
     GetIntrinsicModifierName(): string {
-        return modifier_shengguangdun_swallowable.name;
+        return modifier_shengguangzhen_swallowable.name;
     }
 }
 //吞噬后的技能buff
 @registerModifier()
-export class modifier_shengguangdun_swallowable extends BaseModifier {
+export class modifier_shengguangzhen_swallowable extends BaseModifier {
     override IsHidden(): boolean {
         if (this.GetAbility()) {
             return true;
@@ -78,7 +78,7 @@ export class modifier_shengguangdun_swallowable extends BaseModifier {
         this.cd_remaining -= this.interval
         if (this.cd_remaining <= 0 && parent.IsAlive()) {
             //释放技能
-            parent.AddNewModifier(parent, null, "modifier_shengguangdun", {
+            parent.AddNewModifier(parent, null, "modifier_shengguangzhen", {
                 duration: duration,
                 radius: radius,
                 aoe_radius: aoe_radius,
@@ -101,7 +101,7 @@ export class modifier_shengguangdun_swallowable extends BaseModifier {
 
 // 技能效果
 @registerModifier()
-export class modifier_shengguangdun extends BaseModifier {
+export class modifier_shengguangzhen extends BaseModifier {
     IsHidden(): boolean {
         return false;
     }
@@ -161,7 +161,7 @@ export class modifier_shengguangdun extends BaseModifier {
         // 获取区域内所有敌人
         let random_pos1 = parent.GetAbsOrigin() + RandomVector(RandomFloat(0, this.radius)) as Vector
         let random_pos2 = parent.GetAbsOrigin() + RandomVector(RandomFloat(0, this.radius)) as Vector
-        let thinker1 = CreateModifierThinker(parent, null, "modifier_shengguangdun_thinker", {
+        let thinker1 = CreateModifierThinker(parent, null, "modifier_shengguangzhen_thinker", {
             duration: 3,
             radius: this.radius,
             aoe_radius: this.aoe_radius,
@@ -173,7 +173,7 @@ export class modifier_shengguangdun extends BaseModifier {
             parent.GetTeamNumber(),
             false,
         );
-        let thinker2 = CreateModifierThinker(parent, null, "modifier_shengguangdun_thinker", {
+        let thinker2 = CreateModifierThinker(parent, null, "modifier_shengguangzhen_thinker", {
             duration: 3,
             radius: this.radius,
             aoe_radius: this.aoe_radius,
@@ -191,7 +191,7 @@ export class modifier_shengguangdun extends BaseModifier {
 
 // 技能效果
 @registerModifier()
-export class modifier_shengguangdun_thinker extends BaseModifier {
+export class modifier_shengguangzhen_thinker extends BaseModifier {
     IsHidden(): boolean {
         return false;
     }

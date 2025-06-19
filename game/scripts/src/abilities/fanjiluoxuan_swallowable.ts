@@ -1,6 +1,8 @@
 import { BaseAbility, BaseModifier, registerAbility, registerModifier } from '../utils/dota_ts_adapter';
 import { GetAbilityCooldown, GetAbilityValues } from '../utils/tstl-utils';
-
+/**
+ * 被动技能：反击螺旋
+ */
 @registerAbility()
 export class fanjiluoxuan_swallowable extends BaseAbility {
     GetBehavior(): AbilityBehavior | Uint64 {
