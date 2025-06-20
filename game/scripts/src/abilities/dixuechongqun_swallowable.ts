@@ -98,7 +98,7 @@ export class modifier_dixuechongqun_swallowable extends BaseModifier {
             );
 
             if (targets.length > 0) {
-                parent.AddNewModifier(this.GetCaster(), null, "modifier_dixuechongqun", {
+                parent.AddNewModifier(parent, null, "modifier_dixuechongqun", {
                     duration: duration,
                     radius: radius,
                     aoe_radius: aoe_radius,

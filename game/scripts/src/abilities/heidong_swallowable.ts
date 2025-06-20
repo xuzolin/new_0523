@@ -123,7 +123,7 @@ export class modifier_heidong_swallowable extends BaseModifier {
                 //             // ParticleManager.SetParticleControl(ParticleID, 2, ent_point)
                 //             ParticleManager.ReleaseParticleIndex(ParticleID)
 
-                // parent.AddNewModifier(this.GetCaster(), null, "modifier_heidong", {
+                // parent.AddNewModifier(parent, null, "modifier_heidong", {
                 //     duration: duration,
                 //     radius: radius,
                 //     aoe_radius: aoe_radius,
@@ -173,7 +173,7 @@ export class modifier_heidong_swallowable extends BaseModifier {
     //                 let damage = 100
     //                 ApplyDamage({
     //                     victim: enemy,
-    //                     attacker: this.GetCaster(),
+    //                     attacker: attacker,
     //                     damage: damage,
     //                     ability: this.GetAbility(),
     //                     damage_type: DamageTypes.MAGICAL,

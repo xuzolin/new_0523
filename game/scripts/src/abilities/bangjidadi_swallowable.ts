@@ -98,7 +98,7 @@ export class modifier_bangjidadi_swallowable extends BaseModifier {
             );
 
             if (targets.length > 0) {
-                parent.AddNewModifier(this.GetCaster(), null, "modifier_bangjidadi", {
+                parent.AddNewModifier(parent, null, "modifier_bangjidadi", {
                     duration: duration,
                     radius: radius,
                     aoe_radius: aoe_radius,
@@ -147,7 +147,7 @@ export class modifier_bangjidadi_swallowable extends BaseModifier {
                     let damage = 100
                     ApplyDamage({
                         victim: unit,
-                        attacker: this.GetCaster(),
+                        attacker: attacker,
                         damage: damage,
                         ability: this.GetAbility(),
                         damage_type: DamageTypes.MAGICAL,

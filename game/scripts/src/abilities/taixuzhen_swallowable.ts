@@ -92,7 +92,7 @@ export class modifier_taixuzhen_swallowable extends BaseModifier {
 
             if (targets.length > 0) {
                 // print("targets", targets[0].GetUnitName())
-                parent.AddNewModifier(this.GetCaster(), null, "modifier_taixuzhen", {
+                parent.AddNewModifier(parent, null, "modifier_taixuzhen", {
                     duration: duration,
                     radius: radius,
                     aoe_radius: aoe_radius,

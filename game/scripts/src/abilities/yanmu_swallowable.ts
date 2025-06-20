@@ -128,7 +128,7 @@ export class modifier_yanmu_swallowable extends BaseModifier {
                 //             // ParticleManager.SetParticleControl(ParticleID, 2, ent_point)
                 //             ParticleManager.ReleaseParticleIndex(ParticleID)
 
-                // parent.AddNewModifier(this.GetCaster(), null, "modifier_yanmu", {
+                // parent.AddNewModifier(parent, null, "modifier_yanmu", {
                 //     duration: duration,
                 //     radius: radius,
                 //     aoe_radius: aoe_radius,
@@ -178,7 +178,7 @@ export class modifier_yanmu_swallowable extends BaseModifier {
     //                 let damage = 100
     //                 ApplyDamage({
     //                     victim: enemy,
-    //                     attacker: this.GetCaster(),
+    //                     attacker: attacker,
     //                     damage: damage,
     //                     ability: this.GetAbility(),
     //                     damage_type: DamageTypes.MAGICAL,

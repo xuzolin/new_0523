@@ -98,7 +98,7 @@ export class modifier_shijiansuoding_swallowable extends BaseModifier {
             );
 
             if (targets.length > 0) {
-                parent.AddNewModifier(this.GetCaster(), null, "modifier_shijiansuoding", {
+                parent.AddNewModifier(parent, null, "modifier_shijiansuoding", {
                     duration: duration,
                     radius: radius,
                     aoe_radius: aoe_radius,
@@ -157,7 +157,7 @@ export class modifier_shijiansuoding_swallowable extends BaseModifier {
                     let damage = 100
                     ApplyDamage({
                         victim: target,
-                        attacker: this.GetCaster(),
+                        attacker: attacker,
                         damage: damage,
                         ability: this.GetAbility(),
                         damage_type: DamageTypes.MAGICAL,

@@ -98,7 +98,7 @@ export class modifier_longpozhan_swallowable extends BaseModifier {
             );
 
             if (targets.length > 0) {
-                parent.AddNewModifier(this.GetCaster(), null, "modifier_longpozhan", {
+                parent.AddNewModifier(parent, null, "modifier_longpozhan", {
                     duration: duration,
                     radius: radius,
                     aoe_radius: aoe_radius,

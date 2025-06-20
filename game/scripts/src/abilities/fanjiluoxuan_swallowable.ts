@@ -100,7 +100,7 @@ export class modifier_fanjiluoxuan_swallowable extends BaseModifier {
             );
 
             if (targets.length > 0) {
-                parent.AddNewModifier(this.GetCaster(), null, "modifier_fanjiluoxuan", {
+                parent.AddNewModifier(parent, null, "modifier_fanjiluoxuan", {
                     duration: duration,
                     radius: radius,
                     aoe_radius: aoe_radius,
@@ -171,7 +171,7 @@ export class modifier_fanjiluoxuan_swallowable extends BaseModifier {
             let damage = 100
             ApplyDamage({
                 victim: enemy,
-                attacker: this.GetCaster(),
+                attacker: this.GetParent(),
                 damage: damage,
                 ability: this.GetAbility(),
                 damage_type: DamageTypes.MAGICAL,
@@ -181,10 +181,10 @@ export class modifier_fanjiluoxuan_swallowable extends BaseModifier {
         const particle = `particles/units/heroes/hero_axe/axe_counterhelix_ad.vpcf`;
         const sound = `Hero_Axe.CounterHelix`;
 
-        const effect = ParticleManager.CreateParticle(particle, ParticleAttachment.ABSORIGIN_FOLLOW, this.GetCaster()); // 创建特效
+        const effect = ParticleManager.CreateParticle(particle, ParticleAttachment.ABSORIGIN_FOLLOW, this.GetParent()); // 创建特效
         ParticleManager.ReleaseParticleIndex(effect); // 释放特效
 
-        const effect2 = ParticleManager.CreateParticle("particles/units/heroes/hero_axe/axe_attack_blur_counterhelix.vpcf", ParticleAttachment.ABSORIGIN_FOLLOW, this.GetCaster()); // 创建特效
+        const effect2 = ParticleManager.CreateParticle("particles/units/heroes/hero_axe/axe_attack_blur_counterhelix.vpcf", ParticleAttachment.ABSORIGIN_FOLLOW, this.GetParent()); // 创建特效
         ParticleManager.ReleaseParticleIndex(effect2); // 释放特效
 
         EmitSoundOn(sound, this.GetParent());

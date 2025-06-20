@@ -92,7 +92,7 @@ export class modifier_wudizhan_swallowable extends BaseModifier {
             );
 
             if (targets.length > 0) {
-                parent.AddNewModifier(this.GetCaster(), null, "modifier_wudizhan", {
+                parent.AddNewModifier(parent, null, "modifier_wudizhan", {
                     duration: duration,
                     radius: radius,
                     aoe_radius: aoe_radius,
