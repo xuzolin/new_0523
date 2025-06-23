@@ -2,18 +2,18 @@ import { BaseAbility, BaseModifier, registerAbility, registerModifier } from '..
 import { GetAbilityCooldown, GetAbilityValues } from '../utils/tstl-utils';
 
 @registerAbility()
-export class qiangliji_swallowable extends BaseAbility {
+export class zhendangbo_swallowable extends BaseAbility {
     GetBehavior(): AbilityBehavior | Uint64 {
         return AbilityBehavior.PASSIVE;
     }
 
     GetIntrinsicModifierName(): string {
-        return modifier_qiangliji_swallowable.name;
+        return modifier_zhendangbo_swallowable.name;
     }
 }
 //吞噬后的技能buff
 @registerModifier()
-export class modifier_qiangliji_swallowable extends BaseModifier {
+export class modifier_zhendangbo_swallowable extends BaseModifier {
     override IsHidden(): boolean {
         if (this.GetAbility()) {
             return true;
@@ -21,7 +21,7 @@ export class modifier_qiangliji_swallowable extends BaseModifier {
         return false;
     }
     GetTexture() {
-        return "drow_ranger_multishot";
+        return "magnataur_shockwave";
     }
 
     RemoveOnDeath(): boolean {
@@ -49,8 +49,9 @@ export class modifier_qiangliji_swallowable extends BaseModifier {
     private damage_frost_mult: number = GetAbilityValues(this.ability_name, "damage_frost_mult");
     private frost_stack: number = GetAbilityValues(this.ability_name, "frost_stack");
 
-    private attack_chance: number = GetAbilityValues(this.ability_name, "attack_chance");
+    private attack_count: number = GetAbilityValues(this.ability_name, "attack_count");
 
+    count: number = 0;
     // private original_cd: number = 10;
     // private original_duration = 5;
     // private original_radius = 810;
@@ -70,31 +71,19 @@ export class modifier_qiangliji_swallowable extends BaseModifier {
     OnAttack(event: ModifierAttackEvent) {
         if (event.attacker == this.GetParent()) {
             let attacker = event.attacker as CDOTA_BaseNPC;
+            this.count++
             //概率释放
             // let random = RandomInt(1, 100)
             // if (random <= 15) {
             // if (RollPercentage(15)) {
-            if (RollPseudoRandomPercentage(this.attack_chance, PseudoRandom.CUSTOM_GENERIC, attacker)) {
+            if (this.count >= this.attack_count) {
 
-                const particleId2 = ParticleManager.CreateParticle(
-                    "particles/econ/items/windrunner/windrunner_ti6/windrunner_spell_powershot_channel_ti6_shock_ring.vpcf",
-                    ParticleAttachment.ABSORIGIN_FOLLOW,
-                    this.GetParent()
-                );
-                ParticleManager.SetParticleControlEnt(particleId2, 1, this.GetParent(), ParticleAttachment.ABSORIGIN_FOLLOW, undefined, this.GetParent().GetAbsOrigin(), true);
-                // ParticleManager.SetParticleControl(particleId2, 0, this.GetParent().GetAbsOrigin());
-                // ParticleManager.SetParticleControl(particleId2, 1, this.GetParent().GetAbsOrigin());
-                // ParticleManager.SetParticleControl(particleId2, 2, Vector(this.aoe_radius, this.aoe_radius, this.aoe_radius));
-                ParticleManager.ReleaseParticleIndex(particleId2)
-
-
-
-                //投射物
+               //投射物
                 let projectile_speed = 2000;
                 let distance = 1200;
 
-                // let effectName = "particles/econ/items/windrunner/windranger_arcana/windranger_arcana_spell_powershot.vpcf";
-                let effectName = "particles/econ/items/windrunner/windranger_arcana/windranger_arcana_spell_powershot_combo.vpcf";
+                // let effectName = "particles/econ/items/magnataur/shock_of_the_anvil/magnataur_shockanvil.vpcf";
+                let effectName = "particles/units/heroes/hero_magnataur/magnataur_shockwave.vpcf";
 
                 let direction = attacker.GetForwardVector();
                 let velocity = direction * projectile_speed as Vector;
@@ -125,11 +114,11 @@ export class modifier_qiangliji_swallowable extends BaseModifier {
                     },
                 });
                 // attacker.EmitSound("Hero_DrowRanger.Multishot.Attack")
-                attacker.EmitSound("Ability.Powershot")
-            }
+                attacker.EmitSound("Hero_Magnataur.ShockWave.Cast")
 
+
+                this.count = 0;
+            }
         }
     }
 }
-
-

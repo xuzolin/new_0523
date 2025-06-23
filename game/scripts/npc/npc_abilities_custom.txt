@@ -782,7 +782,7 @@
 		"ScriptFile" "abilities/qiangliji_swallowable"
 		"AbilityValues" {
 			"duration" "5"
-			"trigger_chance" "50"
+			"attack_chance" "50"
 			"radius" "600"
 			"aoe_radius" "350"
             "damage_int_mult" "20"
@@ -809,6 +809,149 @@
 			"particle3"					"particles/econ/items/windrunner/windrunner_ti6/windrunner_spell_powershot_channel_ti6_shock_ring.vpcf"
 		}
 	}
+
+	//连环弹
+	"lianhuandan_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/lianhuandan_swallowable"
+		"AbilityValues" {
+			"duration" "5"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "350"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "windrunner_powershot"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_windrunner.vsndevts"
+			"particle1"					"particles/econ/items/windrunner/windranger_arcana/windranger_arcana_spell_powershot_combo.vpcf"
+			"particle2"					"particles/econ/items/windrunner/windranger_arcana/windranger_arcana_powershot_channel.vpcf"
+			"particle3"					"particles/econ/items/windrunner/windrunner_ti6/windrunner_spell_powershot_channel_ti6_shock_ring.vpcf"
+		}
+	}	
+
+	//火箭炮
+	"huojianpao_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/huojianpao_swallowable"
+		"AbilityValues" {
+			"duration" "5"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "350"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "rattletrap_rocket_flare"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_rattletrap.vsndevts"
+			"particle1"					"particles/units/heroes/hero_rattletrap/rattletrap_rocket_flare.vpcf"
+			"particle2"					"particles/units/heroes/hero_rattletrap/rattletrap_rocket_flare_explosion.vpcf"
+			"particle3"					"particles/econ/items/clockwerk/clockwerk_2022_cc/clockwerk_2022_cc_rocket_flare.vpcf"
+		}
+	}	
+
+	//高射火炮
+	"gaoshehuopao_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/gaoshehuopao_swallowable"
+		"AbilityValues" {
+			"duration" "5"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "350"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "gyrocopter_flak_cannon"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_gyrocopter.vsndevts"
+			"particle1"					""
+			"particle2"					""
+			"particle3"					""
+		}
+	}	
+
+	//震荡波
+	"zhendangbo_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/zhendangbo_swallowable"
+		"AbilityValues" {
+			"duration" "5"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "350"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "magnataur_shockwave"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_magnataur.vsndevts"
+			"particle1"					"particles/units/heroes/hero_magnataur/magnataur_shockwave.vpcf"
+			"particle2"					"particles/econ/items/magnataur/shock_of_the_anvil/magnataur_shockanvil.vpcf"
+			"particle3"					"particles/econ/items/clockwerk/clockwerk_2022_cc/clockwerk_2022_cc_rocket_flare.vpcf"
+		}
+	}	
 
 
 }

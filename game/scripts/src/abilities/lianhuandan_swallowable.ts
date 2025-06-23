@@ -2,18 +2,18 @@ import { BaseAbility, BaseModifier, registerAbility, registerModifier } from '..
 import { GetAbilityCooldown, GetAbilityValues } from '../utils/tstl-utils';
 
 @registerAbility()
-export class qiangliji_swallowable extends BaseAbility {
+export class lianhuandan_swallowable extends BaseAbility {
     GetBehavior(): AbilityBehavior | Uint64 {
         return AbilityBehavior.PASSIVE;
     }
 
     GetIntrinsicModifierName(): string {
-        return modifier_qiangliji_swallowable.name;
+        return modifier_lianhuandan_swallowable.name;
     }
 }
 //吞噬后的技能buff
 @registerModifier()
-export class modifier_qiangliji_swallowable extends BaseModifier {
+export class modifier_lianhuandan_swallowable extends BaseModifier {
     override IsHidden(): boolean {
         if (this.GetAbility()) {
             return true;
