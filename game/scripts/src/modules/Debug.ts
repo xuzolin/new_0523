@@ -155,11 +155,12 @@ export class Debug {
             // hero.AddAbility('tongkujianjiao_swallowable')?.SetLevel(1);
             // hero.AddAbility('yanmu_swallowable')?.SetLevel(1);
             // hero.AddAbility('shujianqifa_swallowable')?.SetLevel(1);
-            hero.AddAbility('shengguangzhen_swallowable')?.SetLevel(1);
+            // hero.AddAbility('shengguangzhen_swallowable')?.SetLevel(1);
             // hero.AddAbility('longpozhan_swallowable')?.SetLevel(1);
             // hero.AddAbility('dizhen_swallowable')?.SetLevel(1);
             // hero.AddAbility('fanjiluoxuan_swallowable')?.SetLevel(1);
-            hero.AddAbility('bingpozhen_swallowable')?.SetLevel(1);
+            // hero.AddAbility('bingpozhen_swallowable')?.SetLevel(1);
+            hero.AddAbility('qiangliji_swallowable')?.SetLevel(1);
 
 
 

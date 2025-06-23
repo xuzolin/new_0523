@@ -21,7 +21,7 @@ export class modifier_bingpozhen_swallowable extends BaseModifier {
         return false;
     }
     GetTexture() {
-        return "skywrath_mage_mystic_flare";
+        return "windrunner_powershot";
     }
 
     RemoveOnDeath(): boolean {
