@@ -85,7 +85,7 @@ export class modifier_liehuochilun_swallowable extends BaseModifier {
         this.cd_remaining -= this.interval
         // print("cd_remaining", this.cd_remaining)
         if (this.cd_remaining <= 0 && parent.IsAlive()) {
-            let spirit_count = 2
+            let spirit_count = 1
             let caster_pos = parent.GetOrigin();
             let direction = parent.GetForwardVector();
 
@@ -101,12 +101,15 @@ export class modifier_liehuochilun_swallowable extends BaseModifier {
                 // 计算每个粒子的角度（均匀分布）初始角度
                 let angle = (i - 1) * (2 * Math.PI / spirit_count);
 
-                // print(angle, VectorToAngles(direction).y)
+                let h_direction = RotatePosition(Vector(0, 0, 0), QAngle(0, (i - 1) * (360 / spirit_count), 0), direction)
 
                 let Thinker = CreateModifierThinker(parent, null, "modifier_liehuochilun", {
                     duration: duration,
                     radius: 100,
                     angle_offset: angle - VectorToAngles(direction).y * 3.14 / 180,
+                    // original_direction: h_direction,
+                    x: h_direction.x,
+                    y: h_direction.y,
                 },
                     parent.GetOrigin(),
                     parent.GetTeamNumber(),
@@ -207,6 +210,10 @@ export class modifier_liehuochilun extends BaseModifier {
     aoe_radius
     units: CDOTA_BaseNPC[]
     particleId: ParticleID
+
+    isInPos = false
+
+    original_direction: Vector
     override OnCreated(params: AnyTable): void {
         if (!IsServer()) return;
         this.units = []
@@ -216,6 +223,11 @@ export class modifier_liehuochilun extends BaseModifier {
         this.rotation_speed = 0.2  // 旋转角速度（弧度/帧）一周 2π/时间 
 
         this.aoe_radius = 300
+
+        this.original_direction = Vector(params.x, params.y, 0)
+
+        // this.original_direction = this.GetCaster().GetForwardVector()
+
         // particles/units/heroes/hero_shredder/shredder_chakram.vpcf
         // particles/econ/items/shredder/hero_shredder_icefx/shredder_chakram_ice.vpcf
         // particles/econ/items/shredder/hero_shredder_icefx/shredder_chakram_stay_ice.vpcf
@@ -245,20 +257,35 @@ export class modifier_liehuochilun extends BaseModifier {
         let parent = this.GetParent()
         let caster = this.GetCaster()
         let caster_pos = caster.GetAbsOrigin()
+        if (this.isInPos == false) {
+            //向前运动
+            let new_pos = parent.GetOrigin() + this.original_direction * 2000 * 0.03 as Vector
+            parent.SetAbsOrigin(GetGroundPosition(new_pos, null))
+            if ((parent.GetAbsOrigin() - caster_pos as Vector).Length2D() >= this.current_radius) {
+                this.isInPos = true
+            }
+        } else {
+            // // -- === 运动逻辑 ===
+            // // --计算新位置（围绕施法者旋转）
+            // this.angle_offset = this.angle_offset - this.rotation_speed
+            // let new_pos = caster_pos + Vector(
+            //     math.cos(this.angle_offset) * this.current_radius,
+            //     math.sin(this.angle_offset) * this.current_radius,
+            //     0
+            // ) as Vector
+            // parent.SetAbsOrigin(new_pos)
 
-        // -- === 运动逻辑 ===
-        // --计算新位置（围绕施法者旋转）
-        this.angle_offset = this.angle_offset - this.rotation_speed
-        let new_pos = caster_pos + Vector(
-            math.cos(this.angle_offset) * this.current_radius,
-            math.sin(this.angle_offset) * this.current_radius,
-            0
-        ) as Vector
-        parent.SetAbsOrigin(new_pos)
+            const rotationAngle = QAngle(0, 12, 0); //角度
+            const rotatedPoint = RotatePosition(caster_pos, rotationAngle, parent.GetAbsOrigin());
+            parent.SetAbsOrigin(GetGroundPosition(rotatedPoint, null))
+
+        }
+
+
 
         let enemies = FindUnitsInRadius(
             caster.GetTeamNumber(), // 敌人的队伍
-            new_pos, // 敌人的位置
+            parent.GetAbsOrigin(), // 敌人的位置
             undefined,
             this.aoe_radius, // 查找范围
             UnitTargetTeam.ENEMY, // 查找敌人

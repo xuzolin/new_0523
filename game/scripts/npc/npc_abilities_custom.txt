@@ -441,7 +441,7 @@
 		"BaseClass" "ability_lua"
 		"ScriptFile" "abilities/liehuochilun_swallowable.lua"
 		"AbilityValues" {
-			"duration" "2"
+			"duration" "2.5"
 			"radius" "600"
 			"aoe_radius" "500"
             "damage_int_mult" "20"
@@ -599,7 +599,7 @@
 		"precache"
 		{
 			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_drowranger.vsndevts"
-			"particle1"					"particles/econ/items/drow/drow_arcana/drow_arcana_shard_v2_hypothermia_projectile.vpcf"
+			"particle1"					"particles/econ/items/drow/drow_arcana/drow_arcana_multishot_linear_proj_frost.vpcf"
 			"particle2"					"particles/units/heroes/hero_drow/drow_multishot_proj_linear_proj.vpcf"
 			"particle3"					"particles/econ/items/windrunner/windranger_arcana/windranger_arcana_spell_powershot.vpcf"
 		}
@@ -827,7 +827,7 @@
 		"MaxLevel" "4"
 		"AbilityCooldown" "10"
 		"AbilityManaCost" "0"
-		"AbilityTextureName" "windrunner_powershot"
+		"AbilityTextureName" "clinkz_burning_barrage"
 		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
 		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
 		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
@@ -838,10 +838,10 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_windrunner.vsndevts"
-			"particle1"					"particles/econ/items/windrunner/windranger_arcana/windranger_arcana_spell_powershot_combo.vpcf"
-			"particle2"					"particles/econ/items/windrunner/windranger_arcana/windranger_arcana_powershot_channel.vpcf"
-			"particle3"					"particles/econ/items/windrunner/windrunner_ti6/windrunner_spell_powershot_channel_ti6_shock_ring.vpcf"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_clinkz.vsndevts"
+			"particle1"					"particles/units/heroes/hero_clinkz/clinkz_searing_arrow_linear_proj.vpcf"
+			"particle2"					""
+			"particle3"					""
 		}
 	}	
 

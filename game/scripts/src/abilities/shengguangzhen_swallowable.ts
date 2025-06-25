@@ -138,6 +138,7 @@ export class modifier_shengguangzhen extends BaseModifier {
 
         this.tickRate = 0.5;
 
+        //白圈
         const particleId2 = ParticleManager.CreateParticle(
             // "particles/units/heroes/hero_zeus/zeus_cloud.vpcf",
             "particles/units/heroes/hero_zeus/zeus_cloud_ground_haze.vpcf",

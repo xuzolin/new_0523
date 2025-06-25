@@ -78,7 +78,8 @@ export class modifier_shujianqifa_swallowable_swallowable extends BaseModifier {
                 let distance = 1000;
 
                 // let effectName = "particles/units/heroes/hero_drow/drow_multishot_proj_linear_proj.vpcf";
-                let effectName = "particles/econ/items/windrunner/windranger_arcana/windranger_arcana_spell_powershot.vpcf";
+                // let effectName = "particles/econ/items/windrunner/windranger_arcana/windranger_arcana_spell_powershot.vpcf";
+                let effectName = "particles/econ/items/drow/drow_arcana/drow_arcana_multishot_linear_proj_frost.vpcf";
 
                 let direction = attacker.GetForwardVector();
                 let velocity = direction * projectile_speed as Vector;

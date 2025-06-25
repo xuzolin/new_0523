@@ -21,7 +21,7 @@ export class modifier_lianhuandan_swallowable extends BaseModifier {
         return false;
     }
     GetTexture() {
-        return "drow_ranger_multishot";
+        return "clinkz_burning_barrage";
     }
 
     RemoveOnDeath(): boolean {
@@ -76,59 +76,122 @@ export class modifier_lianhuandan_swallowable extends BaseModifier {
             // if (RollPercentage(15)) {
             if (RollPseudoRandomPercentage(this.attack_chance, PseudoRandom.CUSTOM_GENERIC, attacker)) {
 
-                const particleId2 = ParticleManager.CreateParticle(
-                    "particles/econ/items/windrunner/windrunner_ti6/windrunner_spell_powershot_channel_ti6_shock_ring.vpcf",
-                    ParticleAttachment.ABSORIGIN_FOLLOW,
-                    this.GetParent()
-                );
-                ParticleManager.SetParticleControlEnt(particleId2, 1, this.GetParent(), ParticleAttachment.ABSORIGIN_FOLLOW, undefined, this.GetParent().GetAbsOrigin(), true);
-                // ParticleManager.SetParticleControl(particleId2, 0, this.GetParent().GetAbsOrigin());
-                // ParticleManager.SetParticleControl(particleId2, 1, this.GetParent().GetAbsOrigin());
-                // ParticleManager.SetParticleControl(particleId2, 2, Vector(this.aoe_radius, this.aoe_radius, this.aoe_radius));
-                ParticleManager.ReleaseParticleIndex(particleId2)
+                //冷却缩减
+                let cd_red = attacker.GetCooldownReduction()
+                let cd = this.original_cd * cd_red
+                let duration = this.original_duration
+                let radius = this.original_radius
+                let aoe_radius = this.original_aoe_radius
 
-
-
-                //投射物
-                let projectile_speed = 2000;
-                let distance = 1200;
-
-                // let effectName = "particles/econ/items/windrunner/windranger_arcana/windranger_arcana_spell_powershot.vpcf";
-                let effectName = "particles/econ/items/windrunner/windranger_arcana/windranger_arcana_spell_powershot_combo.vpcf";
-
-                let direction = attacker.GetForwardVector();
-                let velocity = direction * projectile_speed as Vector;
-                let Ability = attacker.FindAbilityByName("custom_OnProjectileHit")
-
-                ProjectileManager.CreateLinearProjectile({
-                    Ability: Ability,
-                    EffectName: effectName,
-                    vSpawnOrigin: attacker.GetAbsOrigin(),
-                    fDistance: distance,
-                    // fMaxSpeed:1000,
-                    // iVisionRadius: 300,
-                    fStartRadius: 100,
-                    fEndRadius: 100,
-                    Source: attacker,
-                    bHasFrontalCone: false,
-                    // bReplaceExisting:false,
-                    iUnitTargetTeam: UnitTargetTeam.ENEMY,
-                    iUnitTargetFlags: UnitTargetFlags.NONE,
-                    iUnitTargetType: UnitTargetType.ALL,
-                    fExpireTime: GameRules.GetGameTime() + 5,
-                    vVelocity: velocity,
-                    bProvidesVision: false,
-                    ExtraData: {
-                        name: this.GetName(),
-                        danage: 100,
-                        damage_type: DamageTypes.MAGICAL,
-                    },
+                attacker.AddNewModifier(attacker, null, "modifier_lianhuandan", {
+                    duration: duration,
+                    radius: radius,
+                    aoe_radius: aoe_radius,
+                    damage_int_mult: this.damage_int_mult,
+                    damage_frost_mult: this.damage_frost_mult,
+                    frost_stack: this.frost_stack,
                 });
-                // attacker.EmitSound("Hero_DrowRanger.Multishot.Attack")
-                attacker.EmitSound("Ability.Powershot")
             }
 
+
+
+
         }
+    }
+}
+
+// 技能效果
+@registerModifier()
+export class modifier_lianhuandan extends BaseModifier {
+    IsHidden(): boolean {
+        return false;
+    }
+
+    IsDebuff(): boolean {
+        return false
+    }
+
+    IsPurgable(): boolean {
+        return false;
+    }
+    private caster: CDOTA_BaseNPC_Hero
+    private damage: number;
+    private damage_int_mult: number;
+    private damage_frost_mult: number;
+    private frost_stack: number;
+
+    private radius: number;
+    private aoe_radius: number;
+    private tickRate: number;
+    private damageTable: ApplyDamageOptions;
+
+    count: number = 0;
+    max_count: number
+
+    OnCreated(params: any): void {
+        if (!IsServer()) return;
+        this.caster = this.GetCaster() as CDOTA_BaseNPC_Hero;
+        this.damage_int_mult = params.damage_int_mult ?? 0
+        this.damage_frost_mult = params.damage_frost_mult ?? 0
+        this.damage = this.damage_int_mult * this.caster.GetIntellect(false)
+        this.radius = params.radius
+        this.aoe_radius = params.aoe_radius
+        this.frost_stack = params.frost_stack ?? 0
+
+        this.tickRate = 0.2;
+
+        this.max_count = 30
+
+        this.SetDuration(this.max_count * this.tickRate, false)
+
+        this.StartIntervalThink(this.tickRate);
+        this.OnIntervalThink();
+    }
+
+    OnIntervalThink() {
+        if (!IsServer()) return;
+        let parent = this.GetParent();
+        this.count++
+        if (this.count > this.max_count) {
+            this.Destroy()
+            return
+        }
+        //投射物
+        let projectile_speed = 2000;
+        let distance = 1200;
+
+        let effectName = "particles/units/heroes/hero_clinkz/clinkz_searing_arrow_linear_proj.vpcf";
+
+        let direction = parent.GetForwardVector();
+        let velocity = direction * projectile_speed as Vector;
+        let Ability = parent.FindAbilityByName("custom_OnProjectileHit")
+
+        ProjectileManager.CreateLinearProjectile({
+            Ability: Ability,
+            EffectName: effectName,
+            vSpawnOrigin: parent.GetAbsOrigin(),
+            fDistance: distance,
+            // fMaxSpeed:1000,
+            // iVisionRadius: 300,
+            fStartRadius: 100,
+            fEndRadius: 100,
+            Source: parent,
+            bHasFrontalCone: false,
+            // bReplaceExisting:false,
+            iUnitTargetTeam: UnitTargetTeam.ENEMY,
+            iUnitTargetFlags: UnitTargetFlags.NONE,
+            iUnitTargetType: UnitTargetType.ALL,
+            fExpireTime: GameRules.GetGameTime() + 5,
+            vVelocity: velocity,
+            bProvidesVision: false,
+            ExtraData: {
+                name: this.GetName(),
+                danage: 100,
+                damage_type: DamageTypes.MAGICAL,
+            },
+        });
+        // attacker.EmitSound("Hero_DrowRanger.Multishot.Attack")
+        parent.EmitSound("Hero_Clinkz.SearingArrows")
     }
 }
 
