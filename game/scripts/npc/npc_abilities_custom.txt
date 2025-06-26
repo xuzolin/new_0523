@@ -911,7 +911,7 @@
 		"precache"
 		{
 			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_gyrocopter.vsndevts"
-			"particle1"					""
+			"particle1"					"particles/econ/items/gyrocopter/hero_gyrocopter_gyrotechnics/gyro_base_attack.vpcf"
 			"particle2"					""
 			"particle3"					""
 		}
@@ -952,6 +952,78 @@
 			"particle3"					"particles/econ/items/clockwerk/clockwerk_2022_cc/clockwerk_2022_cc_rocket_flare.vpcf"
 		}
 	}	
+
+	//巫师守卫
+	"wushishouwei_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/wushishouwei_swallowable"
+		"AbilityValues" {
+			"duration" "6"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "350"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "lion_finger_of_death"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_lion.vsndevts"
+			"particle1"					"particles/units/heroes/hero_lion/lion_spell_finger_of_death.vpcf"
+			"particle2"					"particles/econ/items/magnataur/shock_of_the_anvil/magnataur_shockanvil.vpcf"
+			"particle3"					"particles/econ/items/clockwerk/clockwerk_2022_cc/clockwerk_2022_cc_rocket_flare.vpcf"
+		}
+	}
+
+	//石化箭
+	"shihuajian_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/shihuajian_swallowable"
+		"AbilityValues" {
+			"duration" "6"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "350"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "medusa_split_shot"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_magnataur.vsndevts"
+			"particle1"					"particles/units/heroes/hero_medusa/medusa_base_attack.vpcf"
+			"particle2"					"particles/units/heroes/hero_medusa/medusa_stone_gaze_debuff_stoned.vpcf"
+			"particle3"					"particles/status_fx/status_effect_medusa_stone_gaze.vpcf"
+		}
+	}		
 
 
 }

@@ -26,6 +26,9 @@ export default function Precache(context: CScriptPrecacheContext) {
             // 'npc_dota_hero_***',
             "npc_dota_hero_target_dummy",
 
+            "npc_dummy_unit",
+            "npc_unit_wushishouwei",
+
         ],
         context
     );

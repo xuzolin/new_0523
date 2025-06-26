@@ -78,20 +78,48 @@ export class modifier_gaoshehuopao_swallowable extends BaseModifier {
             // if (random <= 15) {
             // if (RollPercentage(15)) {
             if (RollPseudoRandomPercentage(this.attack_chance, PseudoRandom.CUSTOM_GENERIC, attacker)) {
+                let projectile_speed = 1000;
+                let Ability = attacker.FindAbilityByName("custom_OnProjectileHit");
+                let effectName = "particles/econ/items/gyrocopter/hero_gyrocopter_gyrotechnics/gyro_base_attack.vpcf"
+
                 const targets = FindUnitsInRadius(
                     this.GetParent().GetTeamNumber(), // 敌人的队伍
                     this.GetParent().GetAbsOrigin(), // 敌人的位置
                     undefined, // 查找范围
-                    1200, // 查找范围
+                    1250, // 查找范围
                     UnitTargetTeam.ENEMY, // 查找敌人
                     UnitTargetType.HERO + UnitTargetType.BASIC, // 查找英雄和小兵
                     UnitTargetFlags.MAGIC_IMMUNE_ENEMIES, // 查找标志，对魔免单位也有效
                     FindOrder.CLOSEST, // 查找顺序
                     false
                 );
-                targets.forEach(enemy => {
-                    attacker.PerformAttack(enemy, false, false, true, true, true, false, false)
-                })
+                // targets.forEach(enemy => {
+                //     attacker.PerformAttack(enemy, false, false, true, true, true, false, false)
+                // })
+                for (const target of targets) {
+                    ProjectileManager.CreateTrackingProjectile(
+                        {
+                            EffectName: effectName,
+                            Ability: Ability,
+                            Source: attacker,
+                            bProvidesVision: false,
+                            iVisionRadius: 0,
+                            // iVisionTeamNumber: DOTATeam_t,
+                            vSourceLoc: attacker.GetOrigin(),
+                            Target: target,
+                            iMoveSpeed: projectile_speed,
+                            flExpireTime: GameRules.GetGameTime() + 10,
+                            bDodgeable: false,
+                            bIsAttack: false,
+
+                            ExtraData: {
+                                name: this.GetName(),
+                                danage: 100,
+                                damage_type: DamageTypes.MAGICAL,
+                            },
+                        }
+                    )
+                }
                 attacker.EmitSound("Hero_Gyrocopter.FlackCannon")
 
                 Timers.CreateTimer(0.5, () => {
@@ -106,9 +134,30 @@ export class modifier_gaoshehuopao_swallowable extends BaseModifier {
                         FindOrder.CLOSEST, // 查找顺序
                         false
                     );
-                    targets.forEach(enemy => {
-                        attacker.PerformAttack(enemy, false, false, true, true, true, false, false)
-                    })
+                    for (const target of targets) {
+                        ProjectileManager.CreateTrackingProjectile(
+                            {
+                                EffectName: effectName,
+                                Ability: Ability,
+                                Source: attacker,
+                                bProvidesVision: false,
+                                iVisionRadius: 0,
+                                // iVisionTeamNumber: DOTATeam_t,
+                                vSourceLoc: attacker.GetOrigin(),
+                                Target: target,
+                                iMoveSpeed: projectile_speed,
+                                flExpireTime: GameRules.GetGameTime() + 10,
+                                bDodgeable: false,
+                                bIsAttack: false,
+
+                                ExtraData: {
+                                    name: this.GetName(),
+                                    danage: 100,
+                                    damage_type: DamageTypes.MAGICAL,
+                                },
+                            }
+                        )
+                    }
                     attacker.EmitSound("Hero_Gyrocopter.FlackCannon")
                 })
             }

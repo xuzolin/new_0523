@@ -78,7 +78,7 @@ export class modifier_zhendangbo_swallowable extends BaseModifier {
             // if (RollPercentage(15)) {
             if (this.count >= this.attack_count) {
 
-               //投射物
+                //投射物
                 let projectile_speed = 2000;
                 let distance = 1200;
 
@@ -121,4 +121,71 @@ export class modifier_zhendangbo_swallowable extends BaseModifier {
             }
         }
     }
+
+    // If 'true` is returned, projectile would be destroyed.
+    OnProjectileHit = (target: CDOTA_BaseNPC | undefined, modifier_name?: string): boolean => {
+        // print("OnProjectileHit", modifier_name)
+        if (target) {            
+
+
+            target.AddNewModifier(this.GetParent(), this.GetAbility(), "modifier_zhendangbo_debuff", { duration: 1, })
+        }
+        return false
+    }
+
+}
+
+@registerModifier()
+export class modifier_zhendangbo_debuff extends BaseModifier {
+    IsHidden(): boolean {
+        return false
+    }
+
+    IsPurgable(): boolean {
+        return false
+    }
+
+    RemoveOnDeath(): boolean {
+        return true
+    }
+
+    IsDebuff(): boolean {
+        return true
+    }
+
+    GetTexture() {
+        return "magnataur_shockwave";
+    }
+
+    // GetAttributes() {
+    //     return ModifierAttribute.MULTIPLE
+    // }
+
+    OnCreated(params: object): void {
+        if (!IsServer()) return;
+        // this.IncrementStackCount();
+    }
+    OnRefresh(params: object): void {
+        if (!IsServer()) return;
+        // if (this.GetStackCount() < this.max_stack_count) {
+        //     this.IncrementStackCount();
+        // }
+    }
+
+    DeclareFunctions(): ModifierFunction[] {
+        return [
+            ModifierFunction.MOVESPEED_BONUS_PERCENTAGE
+        ]
+    }
+
+    GetModifierMoveSpeedBonus_Percentage(): number {
+        return -75
+    }
+
+    // GetEffectName() {
+    //     return "particles/generic_gameplay/generic_slowed_cold.vpcf";
+    // }
+    // GetEffectAttachType() {
+    //     return ParticleAttachment.POINT_FOLLOW;
+    // }
 }
