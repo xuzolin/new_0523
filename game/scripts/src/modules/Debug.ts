@@ -169,7 +169,10 @@ export class Debug {
             // hero.AddAbility('zhendangbo_swallowable')?.SetLevel(1);
 
             // hero.AddAbility('wushishouwei_swallowable')?.SetLevel(1);
-            hero.AddAbility('shihuajian_swallowable')?.SetLevel(1);
+            // hero.AddAbility('shihuajian_swallowable')?.SetLevel(1);
+            // hero.AddAbility('shenzhiqianjie_swallowable')?.SetLevel(1);
+            // hero.AddAbility('xuzhangshengshi_swallowable')?.SetLevel(1);
+            hero.AddAbility('xili_swallowable')?.SetLevel(1);
 
 
 

@@ -1025,5 +1025,113 @@
 		}
 	}		
 
+	//神之谴戒
+	"shenzhiqianjie_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/shenzhiqianjie_swallowable"
+		"AbilityValues" {
+			"duration" "6"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "350"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "mars_gods_rebuke"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_mars.vsndevts"
+			"particle1"					"particles/units/heroes/hero_mars/mars_shield_bash.vpcf"
+			"particle2"					"particles/units/heroes/hero_medusa/medusa_stone_gaze_debuff_stoned.vpcf"
+			"particle3"					"particles/status_fx/status_effect_medusa_stone_gaze.vpcf"
+		}
+	}		
+
+	//虚张声势
+	"xuzhangshengshi_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/xuzhangshengshi_swallowable"
+		"AbilityValues" {
+			"duration" "6"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "350"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "pangolier_swashbuckle"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_pangolier.vsndevts"
+			"particle1"					"particles/units/heroes/hero_pangolier/pangolier_swashbuckler.vpcf"
+			"particle2"					"particles/units/heroes/hero_medusa/medusa_stone_gaze_debuff_stoned.vpcf"
+			"particle3"					"particles/status_fx/status_effect_medusa_stone_gaze.vpcf"
+		}
+	}		
+
+	//洗礼
+	"xili_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/xili_swallowable"
+		"AbilityValues" {
+			"duration" "6"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "500"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "omniknight_purification"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "500"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_omniknight.vsndevts"
+			"particle1"					"particles/units/heroes/hero_omniknight/omniknight_purification.vpcf"
+			"particle2"					""
+			"particle3"					""
+		}
+	}		
+
 
 }
