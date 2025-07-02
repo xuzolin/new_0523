@@ -1133,5 +1133,79 @@
 		}
 	}		
 
+	//魔化
+	"mohua_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/mohua_swallowable"
+		"AbilityValues" {
+			"duration" "5"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "500"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "terrorblade_metamorphosis"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "500"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"game_sounds_terrorblade.vsndevts"
+			"particle1"					"particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_base_attack.vpcf"
+			"particle2"					"particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis.vpcf"
+			"particle3"					"particles/units/heroes/hero_dragon_knight/dragon_knight_transform_black.vpcf"
+			"particle4"					"particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf"
+		}
+	}		
+
+	//古龙形态
+	"gulongxingtai_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/gulongxingtai_swallowable"
+		"AbilityValues" {
+			"duration" "5"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "500"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "dragon_knight_elder_dragon_form"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "500"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"game_sounds_terrorblade.vsndevts"
+			"particle1"					"particles/units/heroes/hero_dragon_knight/dragon_knight_elder_dragon_attack_black.vpcf"
+			"particle2"					"particles/units/heroes/hero_dragon_knight/dragon_knight_transform_red.vpcf"
+			"particle3"					"particles/units/heroes/hero_dragon_knight/dragon_knight_transform_black.vpcf"
+			"particle4"					"particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf"
+		}
+	}	
+
 
 }

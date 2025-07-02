@@ -193,6 +193,20 @@ export class modifier_lianhuandan extends BaseModifier {
         // attacker.EmitSound("Hero_DrowRanger.Multishot.Attack")
         parent.EmitSound("Hero_Clinkz.SearingArrows")
     }
+
+    OnProjectileHit = (target: CDOTA_BaseNPC | undefined, modifier_name?: string): boolean => {
+        if (target) {
+            ApplyDamage({
+                victim: target,
+                attacker: this.GetParent(),
+                damage: 100,
+                ability: this.GetAbility(),
+                damage_type: DamageTypes.PHYSICAL,
+                damage_flags: DamageFlag.NONE,
+            });
+        }
+        return false
+    }
 }
 
 

@@ -7,6 +7,8 @@ export default function Precache(context: CScriptPrecacheContext) {
             // '***.vpcf',
             // 'soundevents/game_sounds_heroes/game_sounds_queenofpain.vsndevts',
             // '***.vmdl',
+            "models/heroes/terrorblade/demon.vmdl",
+            "models/items/dragon_knight/aurora_warrior_set_dragon_style2_aurora_warrior_set/aurora_warrior_set_dragon_style2_aurora_warrior_set.vmdl",
         ],
         context
     );

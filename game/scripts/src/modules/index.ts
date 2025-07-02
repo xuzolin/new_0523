@@ -1,6 +1,7 @@
 import { Debug } from './Debug';
 import { GameConfig } from './GameConfig';
 import { XNetTable } from '../utils/xnet-table';
+import { Filters } from './Filters';
 
 declare global {
     interface CDOTAGameRules {
@@ -27,4 +28,6 @@ export function ActivateModules() {
         // 初始化测试模块xD
         new Debug();
     }
+
+    // new Filters();
 }

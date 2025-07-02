@@ -125,14 +125,20 @@ export class modifier_zhendangbo_swallowable extends BaseModifier {
     // If 'true` is returned, projectile would be destroyed.
     OnProjectileHit = (target: CDOTA_BaseNPC | undefined, modifier_name?: string): boolean => {
         // print("OnProjectileHit", modifier_name)
-        if (target) {            
-
+        if (target) {
+            ApplyDamage({
+                victim: target,
+                attacker: this.GetParent(),
+                damage: 100,
+                ability: this.GetAbility(),
+                damage_type: DamageTypes.PHYSICAL,
+                damage_flags: DamageFlag.NONE,
+            });
 
             target.AddNewModifier(this.GetParent(), this.GetAbility(), "modifier_zhendangbo_debuff", { duration: 1, })
         }
         return false
     }
-
 }
 
 @registerModifier()

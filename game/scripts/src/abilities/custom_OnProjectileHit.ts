@@ -15,13 +15,13 @@ export class custom_OnProjectileHit extends BaseAbility {
         let attacker = this.GetCaster();
         // print(location)
         // DeepPrintTable(ExtraData)
-        ApplyDamage({
-            attacker: attacker,
-            victim: target,
-            damage: 100,
-            damage_type: DamageTypes.MAGICAL,
-            ability: this,
-        });
+        // ApplyDamage({
+        //     attacker: attacker,
+        //     victim: target,
+        //     damage: 100,
+        //     damage_type: DamageTypes.MAGICAL,
+        //     ability: this,
+        // });
 
         if (modifier_name) {
             let modifier = attacker.FindModifierByName(modifier_name)

@@ -102,8 +102,8 @@ export class modifier_tongkujianjiao_swallowable extends BaseModifier {
             let Ability = parent.FindAbilityByName("custom_OnProjectileHit")
 
             if (targets.length > 0) {
-                let scream_pfx = ParticleManager.CreateParticle("particles/units/heroes/hero_queenofpain/queen_scream_of_pain_owner.vpcf", 
-                    ParticleAttachment.ABSORIGIN, 
+                let scream_pfx = ParticleManager.CreateParticle("particles/units/heroes/hero_queenofpain/queen_scream_of_pain_owner.vpcf",
+                    ParticleAttachment.ABSORIGIN,
                     parent)
                 ParticleManager.SetParticleControl(scream_pfx, 0, parent.GetAbsOrigin())
                 ParticleManager.ReleaseParticleIndex(scream_pfx)
@@ -171,6 +171,20 @@ export class modifier_tongkujianjiao_swallowable extends BaseModifier {
                 this.GetAbility().StartCooldown(cd)
             }
         }
+    }
+
+    OnProjectileHit = (target: CDOTA_BaseNPC | undefined, modifier_name?: string): boolean => {
+        if (target) {
+            ApplyDamage({
+                victim: target,
+                attacker: this.GetParent(),
+                damage: 100,
+                ability: this.GetAbility(),
+                damage_type: DamageTypes.PHYSICAL,
+                damage_flags: DamageFlag.NONE,
+            });
+        }
+        return false
     }
 }
 

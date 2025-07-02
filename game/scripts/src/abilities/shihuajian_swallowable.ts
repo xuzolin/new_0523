@@ -138,7 +138,7 @@ export class modifier_shihuajian_swallowable extends BaseModifier {
                     attacker: attacker,
                     damage: damage,
                     ability: this.GetAbility(),
-                    damage_type: DamageTypes.MAGICAL,
+                    damage_type: DamageTypes.PHYSICAL,
                     damage_flags: DamageFlag.NONE,
                 });
                 target.AddNewModifier(this.GetParent(), this.GetAbility(), "modifier_shihuajian_debuff", { duration: 1.5, })
