@@ -1318,4 +1318,152 @@
 		}
 	}
 
+	//幽灵船舰队
+	"youlingchuan_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/youlingchuan_swallowable"
+		"AbilityValues" {
+			"duration" "5"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "500"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "kunkka_ghostship"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "500"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_kunkka.vsndevts"
+			"particle1"					"particles/units/heroes/hero_kunkka/kunkka_ghost_ship.vpcf"
+			"particle2"					"particles/units/heroes/hero_night_stalker/nightstalker_crippling_fear_aura.vpcf"
+			"particle3"					"particles/units/heroes/hero_dragon_knight/dragon_knight_transform_black.vpcf"
+			"particle4"					"particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf"
+		}
+	}
+
+	//弹无虚发
+	"danwuxufa_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/danwuxufa_swallowable"
+		"AbilityValues" {
+			"duration" "5"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "500"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "muerta_dead_shot"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "500"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_kunkka.vsndevts"
+			"particle1"					"particles/units/heroes/hero_muerta/muerta_deadshot_tracking_proj.vpcf"
+			"particle2"					"particles/units/heroes/hero_muerta/muerta_deadshot_linear.vpcf"
+			"particle3"					"particles/units/heroes/hero_muerta/muerta_deadshot_linear.vpcf"
+			"particle4"					"particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf"
+		}
+	}
+
+	//投掷飞镖
+	"touzhifeibiao_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/touzhifeibiao_swallowable"
+		"AbilityValues" {
+			"duration" "5"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "500"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "bounty_hunter_shuriken_toss"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "500"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_kunkka.vsndevts"
+			"particle1"					"particles/units/heroes/hero_ringmaster/ringmaster_wheel_dagger.vpcf"
+			"particle2"					"particles/units/heroes/hero_muerta/muerta_deadshot_linear.vpcf"
+			"particle3"					"particles/units/heroes/hero_muerta/muerta_deadshot_linear.vpcf"
+			"particle4"					"particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf"
+		}
+	}
+
+	//电光火石
+	"dianguanghuoshi_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/dianguanghuoshi_swallowable"
+		"AbilityValues" {
+			"duration" "5"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "500"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "snapfire_scatterblast"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "500"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_snapfire.vsndevts"
+			"particle1"					"particles/units/heroes/hero_snapfire/hero_snapfire_shotgun.vpcf"
+			"particle2"					"particles/units/heroes/hero_muerta/muerta_deadshot_linear.vpcf"
+			"particle3"					"particles/units/heroes/hero_muerta/muerta_deadshot_linear.vpcf"
+			"particle4"					"particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf"
+		}
+	}
+
 }
