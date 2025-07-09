@@ -1429,7 +1429,7 @@
 		}
 	}
 
-	//电光火石
+	//电光火石-（石火）
 	"dianguanghuoshi_swallowable"
     {
 		"BaseClass" "ability_lua"
@@ -1463,6 +1463,150 @@
 			"particle2"					"particles/units/heroes/hero_muerta/muerta_deadshot_linear.vpcf"
 			"particle3"					"particles/units/heroes/hero_muerta/muerta_deadshot_linear.vpcf"
 			"particle4"					"particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf"
+		}
+	}
+
+	//狙击炮
+	"jujipao_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/jujipao_swallowable"
+		"AbilityValues" {
+			"duration" "5"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "500"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "hoodwink_sharpshooter"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "500"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_snapfire.vsndevts"
+			"particle1"					"particles/units/heroes/hero_hoodwink/hoodwink_sharpshooter_projectile.vpcf"
+			"particle2"					"particles/units/heroes/hero_muerta/muerta_deadshot_linear.vpcf"
+			"particle3"					"particles/units/heroes/hero_muerta/muerta_deadshot_linear.vpcf"
+		}
+	}
+
+	//弧形闪电
+	"huxingshandian_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/huxingshandian_swallowable"
+		"AbilityValues" {
+			"duration" "5"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "500"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "zuus_arc_lightning"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "500"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts"
+			"particle1"					"particles/units/heroes/hero_zuus/zuus_arc_lightning_head.vpcf"
+			"particle2"					"particles/units/heroes/hero_zuus/zuus_arc_lightning_.vpcf"
+			"particle3"					"particles/units/heroes/hero_muerta/muerta_deadshot_linear.vpcf"
+		}
+	}
+
+	//刀阵旋风
+	"daozhenxuanfeng_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/daozhenxuanfeng_swallowable"
+		"AbilityValues" {
+			"duration" "5"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "500"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "phantom_assassin_fan_of_knives"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "500"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_phantom_assassin.vsndevts"
+			"particle1"					"particles/units/heroes/hero_phantom_assassin/phantom_assassin_shard_fan_of_knives.vpcf"
+			"particle2"					"particles/units/heroes/hero_muerta/muerta_deadshot_linear.vpcf"
+			"particle3"					"particles/units/heroes/hero_muerta/muerta_deadshot_linear.vpcf"
+		}
+	}
+
+	//巨浪
+	"julang_swallowable"
+    {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/julang_swallowable"
+		"AbilityValues" {
+			"duration" "5"
+			"attack_count" "3"
+			"attack_chance" "50"
+			"radius" "600"
+			"aoe_radius" "500"
+            "damage_int_mult" "20"
+			"damage_frost_mult" "50"
+            "frost_stack" "3"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilityTextureName" "tidehunter_gush"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		// "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastRange" "500"
+		"AbilityCastPoint" "0"
+
+        // Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_tidehunter.vsndevts"
+			"particle1"					"particles/units/heroes/hero_tidehunter/tidehunter_gush_upgrade.vpcf"
+			"particle2"					"particles/units/heroes/hero_muerta/muerta_deadshot_linear.vpcf"
+			"particle3"					"particles/units/heroes/hero_muerta/muerta_deadshot_linear.vpcf"
 		}
 	}
 
