@@ -140,7 +140,7 @@ export class Debug {
 
         if (cmd === 'add') {
             // hero.AddAbility('suiliebingbao_swallowable')?.SetLevel(1);
-            // hero.AddAbility('bingshuangmodun_swallowable')?.SetLevel(1);
+            hero.AddAbility('bingshuangmodun_swallowable')?.SetLevel(1);
             // hero.AddAbility('bingshuangxinxing_swallowable')?.SetLevel(1);
             // hero.AddAbility('wudizhan_swallowable')?.SetLevel(1);
             // hero.AddAbility('dixuechongqun_swallowable')?.SetLevel(1);
@@ -187,7 +187,7 @@ export class Debug {
 
             // hero.AddAbility('huxingshandian_swallowable')?.SetLevel(1);
             // hero.AddAbility('daozhenxuanfeng_swallowable')?.SetLevel(1);
-            hero.AddAbility('julang_swallowable')?.SetLevel(1);
+            // hero.AddAbility('julang_swallowable')?.SetLevel(1);
             
 
 
@@ -209,9 +209,12 @@ export class Debug {
         }
 
         if (cmd === 'test') {
-            hero.AddNewModifier(hero, undefined, "modifier_stunned", { duration: 10 });
+            // hero.AddNewModifier(hero, undefined, "modifier_stunned", { duration: 10 });
+            print("hero.GetLuck()", hero.GetLuck());
+            ModifyUnitCustomStat(hero, "luck", 100);
+            ModifyUnitCustomStat(hero, "aaaaa", 100);
+            CustomUnitStats.debugPrintUnitStats(hero);
+            print("hero.GetLuck()=", hero.GetLuck());
         }
-
-
     }
 }

@@ -2,8 +2,10 @@ import { Debug } from './Debug';
 import { GameConfig } from './GameConfig';
 import { XNetTable } from '../utils/xnet-table';
 import { Filters } from './Filters';
+import { CustomUnitStats, InitializeCustomUnitStats } from './CustomUnitStats';
 
 declare global {
+    var CustomUnitStats: CustomUnitStats;
     interface CDOTAGameRules {
         // 声明所有的GameRules模块，这个主要是为了方便其他地方的引用（保证单例模式）
         XNetTable: XNetTable;
@@ -17,7 +19,7 @@ declare global {
  * 因此在这里作为单例模式使用
  **/
 export function ActivateModules() {
-    
+
     GameRules.AllAbility = LoadKeyValues('scripts/npc/npc_abilities_custom.txt')
 
     if (GameRules.XNetTable == null) {
@@ -30,4 +32,5 @@ export function ActivateModules() {
     }
 
     // new Filters();
+    globalThis.CustomUnitStats = InitializeCustomUnitStats();
 }
